@@ -11,6 +11,23 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1647681541498028}
   m_IsPrefabAsset: 1
+--- !u!1 &1329314488024248
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4068950868019336}
+  - component: {fileID: 23203405883525690}
+  - component: {fileID: 102694009160249342}
+  m_Layer: 0
+  m_Name: MoraleText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1415845549235808
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,13 +37,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4514037076907936}
   - component: {fileID: 212958726002599824}
+  - component: {fileID: 114852451348396414}
   m_Layer: 0
   m_Name: Arbetare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1510344225524808
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +78,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4068950868019336
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329314488024248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.171, y: 0.329, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4514037076907936}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4348084364651466
 Transform:
   m_ObjectHideFlags: 1
@@ -97,10 +128,46 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.027, y: -0.032, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4068950868019336}
   m_Father: {fileID: 4348084364651466}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23203405883525690
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329314488024248}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!61 &61861217139401518
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -126,6 +193,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.149404, y: 0.6876099}
   m_EdgeRadius: 0
+--- !u!102 &102694009160249342
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329314488024248}
+  m_Text: ZzzZz...
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
 --- !u!114 &114612540830796172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d46704fda0eee48ad717a3bdd848ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAwesomeWorker: 0
   arbetare: {fileID: 1415845549235808}
   listOfQuestions:
   - What was the last thing you created?
@@ -196,6 +283,18 @@ MonoBehaviour:
   - Sixty-Four comes asking for bread.
   - They got there early, and they got really good seats.
   - We have never been to Asia, nor have we visited Africa.
+--- !u!114 &114852451348396414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415845549235808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c574fb74c89fc2f419f004e16b85bf68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rpText: {fileID: 102694009160249342}
 --- !u!212 &212838426100988522
 SpriteRenderer:
   m_ObjectHideFlags: 1

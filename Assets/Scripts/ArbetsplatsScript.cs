@@ -5,11 +5,11 @@ using UnityEngine;
 public class ArbetsplatsScript : MonoBehaviour {
 
     private UIScript GUIManager;
-    private bool hasWorker = false;
-    [SerializeField] private bool hasAwesomeWorker = false;
     [SerializeField] private GameObject arbetare;
     const float intervalToCheckAwesomeness = 10.0f;
-    const float awesomenessCheckToPass = 0.8f; //0-1 inclusive
+    const float youMustBeThisAwesome = 0.8f; //0-1 inclusive
+    const float intervalToCheckBadBehaviour = 10.0f;
+    const float youMustBeThisBad = 0.8f; //0-1 inclusive
 
     public bool Aktiv
     {
@@ -17,12 +17,13 @@ public class ArbetsplatsScript : MonoBehaviour {
     }
     public bool HasAwesomeWorker
     {
-        get { return hasAwesomeWorker; }
+        get { return arbetare.GetComponent<Arbetare>().seeminglyAwesome; }
     }
 
     private void Start()
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
+        AddWorker();
     }
 
     public void OnTriggerEnter2D(Collider2D col)
@@ -49,23 +50,52 @@ public class ArbetsplatsScript : MonoBehaviour {
     public void AddWorker()
     {
         arbetare.SetActive(true);
-        hasAwesomeWorker = (Random.value > 0.5f); //Hälften av gångerna är det en awesome person
+        arbetare.GetComponent<Arbetare>().SetAwesome((Random.value > 0.5f)); //Hälften av gångerna är det en awesome person
         if (HasAwesomeWorker)
-            InvokeRepeating("CheckIfWorkerLostHisFlair", 0, intervalToCheckAwesomeness); //var X sekund kollar vi 
+            TurnAwesome();
+        else
+            TurnBad();
     }
 
     public void RemoveWorker()
     {
-        CancelInvoke("CheckIfWorkerLostHisFlair");
+        StahpInvoke();
         arbetare.SetActive(false);
     }
 
     private void CheckIfWorkerLostHisFlair()
     {
-        if (Random.value > awesomenessCheckToPass) 
-            hasAwesomeWorker = false;
+        if (Random.value < youMustBeThisAwesome)
+        {
+            StahpInvoke();
+            arbetare.GetComponent<Arbetare>().SetAwesome(false);
+            TurnBad();
+        }
     }
 
+    private void DoStuffBadWorkersDo()
+    {
+        if (Random.value > youMustBeThisBad)
+        {
+            arbetare.GetComponent<Arbetare>().DoBadStuff();
+        }
+    }
+
+    private void TurnAwesome()
+    {
+        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, intervalToCheckAwesomeness); //var X sekund kollar vi 
+    }
+
+    private void TurnBad()
+    {
+        InvokeRepeating("DoStuffBadWorkersDo", 0, intervalToCheckBadBehaviour);
+    }
+
+    private void StahpInvoke()
+    {
+        CancelInvoke("CheckIfWorkerLostHisFlair");
+        CancelInvoke("DoStuffBadWorkersDo");
+    }
 
     public List<string> listOfQuestions = new List<string> { "What was the last thing you created?",
 "Who is a better cook your mother or grandmother?",

@@ -152,10 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 1415845549235808, guid: 1876a56d17a3d3f42a941b92b5e4e2ff, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 114852451348396414, guid: 1876a56d17a3d3f42a941b92b5e4e2ff,
+        type: 2}
+      propertyPath: rpText
+      value: 
+      objectReference: {fileID: 1393090437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1876a56d17a3d3f42a941b92b5e4e2ff, type: 2}
   m_IsPrefabAsset: 0
@@ -852,6 +853,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!102 &1393090437 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 102694009160249342, guid: 1876a56d17a3d3f42a941b92b5e4e2ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 130615293}
 --- !u!1001 &1424057888
 Prefab:
   m_ObjectHideFlags: 0
