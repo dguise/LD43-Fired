@@ -10,6 +10,7 @@ TagManager:
   - Arbetsplats
   - LeftWall
   - RightWall
+  - PlaceToGetWorkers
   layers:
   - Default
   - TransparentFX

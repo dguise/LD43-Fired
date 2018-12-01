@@ -56,13 +56,21 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //Arbetsplatser
             foreach (var apl in GameObject.FindGameObjectsWithTag(Assets.Scripts.Helper.Constants.Tags.Arbetsplats))
             {
                 if (apl.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
                     apl.GetComponent<ArbetsplatsScript>().RemoveWorker();
             }
+            //Box
+            foreach (var shop in GameObject.FindGameObjectsWithTag(Assets.Scripts.Helper.Constants.Tags.PlaceToGetWorkers))
+            {
+                if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
+                    Debug.Log("Du har köpt någon.");
+            }
         }
-	}
+            
+    }
 
 #region collision movement restrictions
 	Vector2 HandleWalkDown(Vector2 vel) {

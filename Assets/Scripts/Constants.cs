@@ -11,5 +11,7 @@ namespace Assets.Scripts.Helper.Constants
         public static string WalkUpArea = "WalkUpArea";
         public static string WalkDownArea = "WalkDownArea";
         public static string Arbetsplats = "Arbetsplats";
+        public static string PlaceToGetWorkers = "PlaceToGetWorkers";
+
     }
 }
