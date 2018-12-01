@@ -25,7 +25,7 @@ public class ArbetsplatsScript : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (IsPlayer(col) && hasWorker)
+        if (IsPlayer(col) && Aktiv)
         {
             //AddWorker();
             GUIManager.ShowDialogue(listOfQuestions[Random.Range(0, listOfQuestions.Count - 1)], 
