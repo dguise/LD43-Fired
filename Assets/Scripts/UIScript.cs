@@ -56,11 +56,6 @@ public class UIScript : MonoBehaviour {
     private void Update()
     {
         ScoreText = Time.timeSinceLevelLoad.ToString();
-
-        if (Input.anyKeyDown)
-        {
-            ShowDialogue("Hej", "Jag är en katt. Meow." + ScoreText);
-        }
     }
 
     Coroutine coroutine = null;
