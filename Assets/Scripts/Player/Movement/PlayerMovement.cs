@@ -6,12 +6,16 @@ public class PlayerMovement : MonoBehaviour {
 	[Range(0.01f, 0.1f)]
 	public float speed = 0.05f;
 
+	private float stairSpeedModifier = 0.5f;
+
 	private bool OnStairs = false;
 	private bool StairsActivated = false;
 	private bool OnWalkDownArea = false;
 	private bool OnWalkUpArea = false;
 	private bool TouchingRightWall = false;
 	private bool TouchingLeftWall = false;
+
+	private SpriteRenderer sr;
 
 	private bool CanWalkVertical { 
 		get { 
@@ -25,6 +29,10 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	void Start() {
+		sr = GetComponent<SpriteRenderer>();
+	}
+
 	void Update () {
 		Vector2 velocity = new Vector2(0, 0);
 
@@ -35,11 +43,14 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		if (CanWalkVertical) {
-			velocity.y = Input.GetAxisRaw("Vertical") * speed;
+			velocity.y = Input.GetAxisRaw("Vertical") * speed * stairSpeedModifier;
 			velocity = HandleWalkDown(velocity);
 			velocity = HandleWalkUp(velocity);
 			velocity = HandleStairs(velocity);
 		}
+
+		if (velocity.x != 0)
+			sr.flipX = velocity.x > 0;
 
 		transform.Translate(velocity);
 
@@ -78,10 +89,10 @@ public class PlayerMovement : MonoBehaviour {
 			StairsActivated = true;
 		}
 		if (vel.y > 0) {
-			vel.x = speed * angle;
+			vel.x = speed * stairSpeedModifier * angle;
 		}
 		if (vel.y < 0) {
-			vel.x = -speed * angle;
+			vel.x = -speed * stairSpeedModifier * angle;
 		}
 		return vel;
 	}
