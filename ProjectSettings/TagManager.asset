@@ -8,6 +8,8 @@ TagManager:
   - WalkDownArea
   - WalkUpArea
   - Arbetsplats
+  - LeftWall
+  - RightWall
   layers:
   - Default
   - TransparentFX
