@@ -25,9 +25,17 @@ public class Arbetare : MonoBehaviour {
     IEnumerator ShowrpText()
     {
         this.rpText.gameObject.SetActive(true);
-        this.rpText.text = "ZzzZz...";
+        this.rpText.text = ListOfBadRPTexts[Random.Range(0, ListOfBadRPTexts.Count - 1)];
         yield return new WaitForSeconds(2.0f);
         this.rpText.text = "";
         this.rpText.gameObject.SetActive(false);
     }
+
+    private List<string> ListOfBadRPTexts = new List<string>
+    {
+        "Hahaha!",
+        "La la la",
+        "♪-♫-♪",
+        "Zzzzz",
+    };
 }
