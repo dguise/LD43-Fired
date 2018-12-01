@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	[Range(0.01f, 0.1f)]
-	public float speed = 0.05f;
+    [Range(0.01f, 0.1f)]
+    public float speed = 0.05f;
 
-	private float stairSpeedModifier = 0.5f;
+    private float stairSpeedModifier = 0.5f;
 
-	private bool OnStairs = false;
-	private bool StairsActivated = false;
-	private bool OnWalkDownArea = false;
-	private bool OnWalkUpArea = false;
-	private bool TouchingRightWall = false;
-	private bool TouchingLeftWall = false;
+    private bool OnStairs = false;
+    private bool StairsActivated = false;
+    private bool OnWalkDownArea = false;
+    private bool OnWalkUpArea = false;
+    private bool TouchingRightWall = false;
+    private bool TouchingLeftWall = false;
 
-	private SpriteRenderer sr;
+    private SpriteRenderer sr;
+    [SerializeField]private SpriteRenderer srChild;
 
 	private bool CanWalkVertical { 
 		get { 
@@ -29,7 +30,13 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	void Start() {
+    public bool CarryingWorker
+    {
+        get { return srChild.gameObject.activeSelf; }
+    }
+
+
+    void Start() {
 		sr = GetComponent<SpriteRenderer>();
 	}
 
@@ -50,9 +57,13 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		if (velocity.x != 0)
+        { 
 			sr.flipX = velocity.x > 0;
+            srChild.flipX = !sr.flipX;
+            srChild.transform.localPosition = (srChild.flipX ? new Vector3(0.34f, srChild.transform.localPosition.y, srChild.transform.localPosition.z) : new Vector3(-0.34f, srChild.transform.localPosition.y, srChild.transform.localPosition.z));
+        }
 
-		transform.Translate(velocity);
+        transform.Translate(velocity);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -66,14 +77,20 @@ public class PlayerMovement : MonoBehaviour {
             foreach (var shop in GameObject.FindGameObjectsWithTag(Assets.Scripts.Helper.Constants.Tags.PlaceToGetWorkers))
             {
                 if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
-                    Debug.Log("Du har köpt någon.");
+                    if (!srChild.gameObject.activeSelf)
+                        srChild.gameObject.SetActive(true);
             }
         }
             
     }
 
-#region collision movement restrictions
-	Vector2 HandleWalkDown(Vector2 vel) {
+    public void DropOffWorker()
+    {
+        srChild.gameObject.SetActive(false);
+    }
+
+    #region collision movement restrictions
+    Vector2 HandleWalkDown(Vector2 vel) {
 		if (OnWalkDownArea && !OnStairs)
 			if (vel.y >= 0) {
 				vel.y = 0;

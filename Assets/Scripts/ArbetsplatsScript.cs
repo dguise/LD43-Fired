@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArbetsplatsScript : MonoBehaviour {
+public class ArbetsplatsScript : MonoBehaviour
+{
 
     private UIScript GUIManager;
     [SerializeField] private GameObject arbetare;
@@ -23,16 +24,21 @@ public class ArbetsplatsScript : MonoBehaviour {
     private void Start()
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
-        AddWorker();
+        //AddWorker();
     }
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (IsPlayer(col) && Aktiv)
+        if (IsPlayer(col))
         {
-            //AddWorker();
-            GUIManager.ShowDialogue(listOfQuestions[Random.Range(0, listOfQuestions.Count - 1)], 
-                                    listOfAnswers[Random.Range(0, listOfAnswers.Count - 1)]);
+            if (Aktiv)
+                GUIManager.ShowDialogue(listOfQuestions[Random.Range(0, listOfQuestions.Count - 1)],
+                                        listOfAnswers[Random.Range(0, listOfAnswers.Count - 1)]);
+            else if (col.gameObject.GetComponent<PlayerMovement>().CarryingWorker)
+            {
+                AddWorker();
+                col.gameObject.GetComponent<PlayerMovement>().DropOffWorker();
+            }
         }
     }
 
