@@ -53,10 +53,10 @@ public class UIScript : MonoBehaviour {
     
 
 
-    private void Update()
-    {
-        ScoreText = Time.timeSinceLevelLoad.ToString();
-    }
+    //private void Update()
+    //{
+    //    ScoreText = Time.timeSinceLevelLoad.ToString();
+    //}
 
     Coroutine coroutine = null;
     public void ShowDialogue(string question, string answer)

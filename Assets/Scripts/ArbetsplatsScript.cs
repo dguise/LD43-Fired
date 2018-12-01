@@ -7,12 +7,20 @@ public class ArbetsplatsScript : MonoBehaviour {
     [SerializeField] private bool hasWorker = false;
     [SerializeField] private bool hasAwesomeWorker = false;
 
+    public bool Aktiv
+    {
+        get { return hasWorker; } //Kanske lägga på mer logik framöver
+    }
+    public bool HasAwesomeWorker
+    {
+        get { return hasAwesomeWorker; }
+    }
+
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (IsPlayer(col))
             AddWorker();
     }
-
 
     public void OnTriggerExit2D(Collider2D col)
     {

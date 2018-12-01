@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114612540830796172}
   m_Layer: 0
   m_Name: Arbetsplats
-  m_TagString: Untagged
+  m_TagString: Arbetsplats
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
