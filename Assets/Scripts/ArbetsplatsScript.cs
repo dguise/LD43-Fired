@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ArbetsplatsScript : MonoBehaviour {
 
-    [SerializeField] private bool hasWorker = false;
-    [SerializeField] private bool hasAwesomeWorker = false;
     private UIScript GUIManager;
+    private bool hasWorker = false;
+    [SerializeField] private bool hasAwesomeWorker = false;
+    [SerializeField] private GameObject arbetare;
 
     public bool Aktiv
     {
-        get { return hasWorker; } //Kanske lägga på mer logik framöver
+        get { return arbetare.activeSelf; } //Kanske lägga på mer logik framöver
     }
     public bool HasAwesomeWorker
     {
@@ -24,9 +25,9 @@ public class ArbetsplatsScript : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (IsPlayer(col))
+        if (IsPlayer(col) && hasWorker)
         {
-            AddWorker();
+            //AddWorker();
             GUIManager.ShowDialogue(listOfQuestions[Random.Range(0, listOfQuestions.Count - 1)], 
                                     listOfAnswers[Random.Range(0, listOfAnswers.Count - 1)]);
         }
@@ -34,8 +35,8 @@ public class ArbetsplatsScript : MonoBehaviour {
 
     public void OnTriggerExit2D(Collider2D col)
     {
-        if (IsPlayer(col))
-            RemoveWorker();
+        //if (IsPlayer(col))
+        //    RemoveWorker();
     }
 
     private bool IsPlayer(Collider2D col)
@@ -45,13 +46,13 @@ public class ArbetsplatsScript : MonoBehaviour {
 
     public void AddWorker()
     {
-        hasWorker = true;
+        arbetare.SetActive(true);
         hasAwesomeWorker = (Random.value > 0.5f); //Hälften av gångerna är det en awesome person
     }
 
     public void RemoveWorker()
     {
-        hasWorker = false;
+        arbetare.SetActive(false);
     }
 
 
