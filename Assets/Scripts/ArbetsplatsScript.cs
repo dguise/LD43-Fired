@@ -8,6 +8,8 @@ public class ArbetsplatsScript : MonoBehaviour {
     private bool hasWorker = false;
     [SerializeField] private bool hasAwesomeWorker = false;
     [SerializeField] private GameObject arbetare;
+    const float intervalToCheckAwesomeness = 10.0f;
+    const float awesomenessCheckToPass = 0.8f; //0-1 inclusive
 
     public bool Aktiv
     {
@@ -48,11 +50,20 @@ public class ArbetsplatsScript : MonoBehaviour {
     {
         arbetare.SetActive(true);
         hasAwesomeWorker = (Random.value > 0.5f); //Hälften av gångerna är det en awesome person
+        if (HasAwesomeWorker)
+            InvokeRepeating("CheckIfWorkerLostHisFlair", 0, intervalToCheckAwesomeness); //var X sekund kollar vi 
     }
 
     public void RemoveWorker()
     {
+        CancelInvoke("CheckIfWorkerLostHisFlair");
         arbetare.SetActive(false);
+    }
+
+    private void CheckIfWorkerLostHisFlair()
+    {
+        if (Random.value > awesomenessCheckToPass) 
+            hasAwesomeWorker = false;
     }
 
 
