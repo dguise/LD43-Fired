@@ -12,9 +12,9 @@ public class GameManager : Singleton<GameManager>
     private GameObject[] _floorPrefabs;
     private GameObject tarp;
     private GameObject currentTarp;
-    private bool _tarping = false;
     private UIScript _guiManager;
     private int _money = 0;
+    private float duration = 1.0f; // duration in seconds
     public int Money
     {
         get { return _money; }
@@ -31,17 +31,6 @@ public class GameManager : Singleton<GameManager>
         InvokeRepeating("CalculateIncome", 0, 1.0f);
         _floorPrefabs = Resources.LoadAll<GameObject>("Floors");
         tarp = GameObject.Find("ConstructionTarp");
-    }
-
-    void Update() {
-        if (currentTarp != null) {
-            var diff = ExpansionInterval - Money;
-            currentTarp.transform.localScale = new  Vector3(
-                currentTarp.transform.localScale.x, 
-                diff / Settings.RangeForStartingTarp, 
-                currentTarp.transform.localScale.z);
-            
-        }
     }
 
     void CalculateIncome()
@@ -63,28 +52,56 @@ public class GameManager : Singleton<GameManager>
 #endif
         Money += income;
 
-        if (Money >= ExpansionInterval) {
+        if (Money >= ExpansionInterval)
+        {
             ExpansionInterval += ExpansionInterval;
             AddFloor();
-            _tarping = false;
-            GameObject.Destroy(currentTarp);
-        }
-        else if (Money > ExpansionInterval - Settings.RangeForStartingTarp && !_tarping)
-        {
-            _tarping = true;
-            currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT - (FLOOR_HEIGHT / 2), 0f), Quaternion.identity);
         }
     }
    
     void AddFloor()
     {
         Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
+        v.gameObject.SetActive(false);
+        currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT - (FLOOR_HEIGHT / 2)), Quaternion.identity);
         _floors.Add(v);
-        kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
-        
+        StartCoroutine(Tarp(currentTarp));
+
         var waves = GameObject.FindObjectsOfType<Vagstigning>();
         foreach(var wave in waves) {
             wave.shouldRise = true;
         }
+    }
+
+    private IEnumerator FulFixFörErik()
+    {
+        kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
+        _floors[_floors.Count - 1].gameObject.SetActive(true);
+        yield return new WaitForEndOfFrame();
+    }
+
+    IEnumerator Tarp(GameObject tarp)
+    {
+        currentTarp.transform.localScale = new Vector3(1, 0, 1);
+        float elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            if (tarp != null)
+                currentTarp.transform.localScale = Vector3.Lerp(currentTarp.transform.localScale, new Vector3(1, 1, 1), (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        StartCoroutine(FulFixFörErik());
+
+        elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            if (tarp != null)
+                currentTarp.transform.localScale = Vector3.Lerp(currentTarp.transform.localScale, new Vector3(1, 0, 1), (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        GameObject.Destroy(currentTarp);
     }
 }
