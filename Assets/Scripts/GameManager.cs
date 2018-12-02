@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public Transform vaning;
     public float vaningsHojd;
 
     [SerializeField] private List<Transform> vaningar;
+    private GameObject[] Vaningar;
 
     private UIScript GUIManager;
 
@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
         InvokeRepeating("BeraknaInkomst", 0, 1.0f);
+        Vaningar = Resources.LoadAll<GameObject>("Floors");
     }
 
     void BeraknaInkomst()
@@ -57,7 +58,7 @@ public class GameManager : Singleton<GameManager>
 
     void AddVaning()
     {
-        Transform v = Instantiate(vaning, transform.position + new Vector3(0f, vaningar.Count * vaningsHojd, 0f), Quaternion.identity);
+        Transform v = Instantiate(Vaningar[Random.Range(0, Vaningar.Length - 1)].transform, transform.position + new Vector3(0f, vaningar.Count * vaningsHojd, 0f), Quaternion.identity);
         vaningar.Add(v);
     }
 }
