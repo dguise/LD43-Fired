@@ -16,17 +16,19 @@ public static class Settings {
     public static const float YouMustBeThisAwesome = 0.8f; // 0 - 1 inclusive
     public static const float IntervalToCheckBadBehaviour = 10.0f;
     public static const float YouMustBeThisBad = 0.8f; // 0 - 1 inclusive
+    public static const float RotationSpeed = 3f;
 
     #endregion
     #region ____INCOME____
 
     public static const int INCOME_PER_GOOD_WORKSTATION = 1; // TODO IMPLEMENT IN GameManager.cs
     public static const int INCOME_PER_WORKSTATION = 0; // TODO IMPLEMENT IN GameManager.cs
-    public static int ExpansionInterval = 100; // TODO IMPLEMENT IN GameManager.cs
     
     #endregion
-    #region ____Water____
+    #region ____Misc____
     public static const float RiseSpeed = 0.2f;
+    public static const float RangeForStartingTarp = 30f;
+    
 
     #endregion
 

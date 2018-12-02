@@ -5,8 +5,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private const float FLOOR_HEIGHT = 1.58f;
-    private const int INCOME_PER_GOOD_WORKSTATION = 1;
-    private const int INCOME_PER_WORKSTATION = 0;
     public Transform kiosk;
 
     [SerializeField] private List<Transform> _floors;
@@ -14,8 +12,6 @@ public class GameManager : Singleton<GameManager>
     private GameObject tarp;
     private GameObject currentTarp;
     private bool _tarping = false;
-    private float _rangeForStartingTarp = 30.0f;
-
     private UIScript _guiManager;
     private int _money = 0;
     public int Money
@@ -38,6 +34,14 @@ public class GameManager : Singleton<GameManager>
         tarp = GameObject.Find("ConstructionTarp");
     }
 
+    void Update() {
+        var diff = ExpansionInterval - Money;
+        currentTarp.transform.localScale = new  Vector3(
+            currentTarp.transform.localScale.x, 
+            diff / Settings.RangeForStartingTarp, 
+            currentTarp.transform.localScale.z);
+    }
+
     void CalculateIncome()
     {
         var workstations = GameObject.FindObjectsOfType<ArbetsplatsScript>();
@@ -46,13 +50,13 @@ public class GameManager : Singleton<GameManager>
         foreach (var workstation in workstations)
         {
             income += (workstation.HasAwesomeWorker)
-                ? INCOME_PER_GOOD_WORKSTATION
-                : INCOME_PER_WORKSTATION;
+                ? Settings.INCOME_PER_GOOD_WORKSTATION
+                : Settings.INCOME_PER_WORKSTATION;
         }
 
         Money += income;
 
-        if (Money >= ExpansionInterval)
+        if (Money >= ExpansionInterval) {
             ExpansionInterval += ExpansionInterval;
             AddFloor();
             _tarping = false;
@@ -60,13 +64,7 @@ public class GameManager : Singleton<GameManager>
         else if (Money > ExpansionInterval - _rangeForStartingTarp && !_tarping)
         {
             _tarping = true;
-
             currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
-        }
-        else if (_tarping)
-        {
-            var diff = ExpansionInterval - Money;
-            currentTarp.transform.localScale = new  Vector3(currentTarp.transform.localScale.x, diff / _rangeForStartingTarp, currentTarp.transform.localScale.z);
         }
     }
    
