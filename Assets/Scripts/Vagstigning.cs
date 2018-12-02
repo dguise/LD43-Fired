@@ -11,7 +11,7 @@ public class Vagstigning : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		
-		if (col.tag != Tags.Player) {
+		if (col.tag == Tags.Player) {
 			if (FadeManager.Instance != null) {
 				FadeManager.Instance.FadeOut(() => {
 					LoadGameOverScene();
