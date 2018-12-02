@@ -15,6 +15,7 @@ public class GlassCrusher : MonoBehaviour {
 		if (!triggered) {
 			ps.Play();
 			triggered = true;
+			AudioManager.Instance.PlayRandomize(0.5f, 5, 6, 7, 8);
 		}
 	}
 }
