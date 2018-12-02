@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 baby.GetComponent<Rigidbody2D>().simulated = true;
                 frozen = true;
                 anim.SetBool("Running", false);
+                AudioManager.Instance.PlayRandomize(0f, 11);
                 return true;
             }
         }
@@ -127,11 +128,13 @@ public class PlayerMovement : MonoBehaviour
         baby.GetComponent<Rigidbody2D>().simulated = true;
         baby.GetComponent<Rigidbody2D>().AddForce(new Vector2(this.transform.position.x < 0 ? -kickingPowah : kickingPowah, 3), ForceMode2D.Impulse);
         GameObject.Destroy(baby, 3.0f);
+        AudioManager.Instance.PlayRandomize(0.5f, 9, 10);
     }
 
     public void DropOffWorker()
     {
         srChild.gameObject.SetActive(false);
+        AudioManager.Instance.PlayRandomize(0.5f, 12);
     }
 
     #region collision movement restrictions

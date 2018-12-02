@@ -36,6 +36,10 @@ public class AudioManager : MonoBehaviour
         _soundEffectList = Resources.LoadAll<AudioClip>("chat").ToList();
         _songList = Resources.LoadAll<AudioClip>("Songs").ToList();
         _soundEffectList.AddRange(Resources.LoadAll<AudioClip>("glass"));
+        _soundEffectList.AddRange(Resources.LoadAll<AudioClip>("kick"));
+        _soundEffectList.AddRange(Resources.LoadAll<AudioClip>("call"));
+        _soundEffectList.AddRange(Resources.LoadAll<AudioClip>("hire"));
+        _soundEffectList.AddRange(Resources.LoadAll<AudioClip>("construction"));
 
         _songSource = gameObject.AddComponent<AudioSource>();
         _songSource.volume = volume;
