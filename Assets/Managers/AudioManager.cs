@@ -18,13 +18,7 @@ public class AudioManager : Singleton<AudioManager>
 
     void Start()
     {
-        /*
-         * Initialize audio lists, probably with preloaded assets
-         * 
-        songs = PrefabRepository.Instance.Songs;
-        */
-
-        _soundEffectList = Resources.LoadAll<AudioClip>("Chat").ToList();
+        _soundEffectList = Resources.LoadAll<AudioClip>("chat").ToList();
 
         _songSource = gameObject.AddComponent<AudioSource>();
         if (startingMusic >= 0)
@@ -44,7 +38,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         pitch = Random.Range(1 - pitch, 1 + pitch);
         int random = Random.Range(0, sound.Length);
-        PlayAudio(sound[random]);
+        PlayAudio(sound[random], pitch);
     }
 
     // Song intro

@@ -103,8 +103,6 @@ public class PlayerMovement : MonoBehaviour
                     if (!srChild.gameObject.activeSelf)
                         srChild.gameObject.SetActive(true);
             }
-
-			// AudioManager.Instance.PlayAudio(0);
         }
     }
 

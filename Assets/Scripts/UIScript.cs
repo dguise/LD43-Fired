@@ -50,14 +50,6 @@ public class UIScript : MonoBehaviour {
         }
     }
 
-    
-
-
-    //private void Update()
-    //{
-    //    ScoreText = Time.timeSinceLevelLoad.ToString();
-    //}
-
     Coroutine coroutine = null;
     public void ShowDialogue(string question, string answer)
     {
@@ -70,6 +62,7 @@ public class UIScript : MonoBehaviour {
         }
 
         coroutine = StartCoroutine(ShowOrHideDialogue(question, answer));
+        AudioManager.Instance.PlayRandomize(0.5f, 0, 1, 2, 3, 4);
     }
 
     IEnumerator ShowOrHideDialogue(string question, string answer, float secondsToWaitForHide = 5.0f)

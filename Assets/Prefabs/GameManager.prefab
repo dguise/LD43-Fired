@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vaning: {fileID: 4344602872695312, guid: 27233d5cd393c62488a1298324e13f7a, type: 2}
-  vaningsHojd: 0
+  vaningsHojd: 1.58
   vaningar: []
 --- !u!114 &114683885923917204
 MonoBehaviour:

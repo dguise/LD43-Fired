@@ -45,13 +45,13 @@ public class PrefabManager : Singleton<PrefabManager>
         {
             Sounds.Add(Resources.Load(sound) as AudioClip);   
         }
-        Debug.Log(Sounds.Count);
         // IncrementProgress();
 
         // foreach (var particleName in Enum.GetNames(typeof(ParticleTypes)))
         // {
         //     ParticleEffects.Add(Resources.Load<GameObject>(particleName));
         // }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void IncrementProgress()

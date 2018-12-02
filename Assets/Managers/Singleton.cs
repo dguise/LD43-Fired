@@ -22,6 +22,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 if (_instance == null)
                 {
                     var instances = FindObjectsOfType<T>();
+                    _instance = instances[0];
+                    
                     if (instances.Length > 1)
                     {
                         Debug.LogError("[Singleton] Something went really wrong " +
