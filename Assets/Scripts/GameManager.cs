@@ -11,6 +11,10 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private List<Transform> _floors;
     private GameObject[] _floorPrefabs;
+    private GameObject tarp;
+    private GameObject currentTarp;
+    private bool _tarping = false;
+    private float _rangeForStartingTarp = 30.0f;
 
     private UIScript _guiManager;
     private int _money = 0;
@@ -31,6 +35,7 @@ public class GameManager : Singleton<GameManager>
         _guiManager = GameObject.FindObjectOfType<UIScript>();
         InvokeRepeating("CalculateIncome", 0, 1.0f);
         _floorPrefabs = Resources.LoadAll<GameObject>("Floors");
+        tarp = GameObject.Find("ConstructionTarp");
     }
 
     void CalculateIncome()
@@ -40,20 +45,33 @@ public class GameManager : Singleton<GameManager>
         int income = 0;
         foreach (var workstation in workstations)
         {
-            income = 10;                
+            income = 10;
             income += (workstation.HasAwesomeWorker)
-                ? INCOME_PER_GOOD_WORKSTATION 
+                ? INCOME_PER_GOOD_WORKSTATION
                 : INCOME_PER_WORKSTATION;
         }
 
         Money += income;
 
-        if (Money >= ExpansionInterval) {
+        if (Money >= ExpansionInterval)
+        {
             ExpansionInterval += (_floors.Count * 100);
             AddFloor();
+            _tarping = false;
+        }
+        else if (Money > ExpansionInterval - _rangeForStartingTarp && !_tarping)
+        {
+            _tarping = true;
+
+            currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
+        }
+        else if (_tarping)
+        {
+            var diff = ExpansionInterval - Money;
+            currentTarp.transform.localScale = new  Vector3(currentTarp.transform.localScale.x, diff / _rangeForStartingTarp, currentTarp.transform.localScale.z);
         }
     }
-
+   
     void AddFloor()
     {
         Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
