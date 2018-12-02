@@ -77,8 +77,8 @@ public class PlayerMovement : MonoBehaviour
             sr.flipX = velocity.x > 0;
             srChild.flipX = !sr.flipX;
             srChild.transform.localPosition = (srChild.flipX)
-                ? new Vector3(0.34f, srChild.transform.localPosition.y, srChild.transform.localPosition.z)
-                : new Vector3(-0.34f, srChild.transform.localPosition.y, srChild.transform.localPosition.z);
+                ? new Vector3(0.44f, srChild.transform.localPosition.y, srChild.transform.localPosition.z)
+                : new Vector3(-0.44f, srChild.transform.localPosition.y, srChild.transform.localPosition.z);
         }
 
         transform.Translate(velocity);
