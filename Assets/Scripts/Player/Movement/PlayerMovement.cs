@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private SpriteRenderer sr;
     [SerializeField]private SpriteRenderer srChild;
+	private Animator anim;
 
 	private bool CanWalkVertical { 
 		get { 
@@ -38,7 +39,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start() {
 		sr = GetComponent<SpriteRenderer>();
+		anim = GetComponent<Animator>();
 	}
+
 
 	void Update () {
 		Vector2 velocity = new Vector2(0, 0);
@@ -56,8 +59,10 @@ public class PlayerMovement : MonoBehaviour {
 			velocity = HandleStairs(velocity);
 		}
 
-		if (velocity.x != 0)
-        { 
+		var isRunning = velocity.x != 0;
+		anim.SetBool("Running", isRunning);
+		if (isRunning)
+        {
 			sr.flipX = velocity.x > 0;
             srChild.flipX = !sr.flipX;
             srChild.transform.localPosition = (srChild.flipX)
@@ -69,7 +74,6 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Arbetsplatser
             foreach (var apl in GameObject.FindGameObjectsWithTag(Tags.Arbetsplats))
             {
                 if (apl.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
