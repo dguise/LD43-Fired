@@ -67,14 +67,14 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Arbetsplatser
-            foreach (var apl in GameObject.FindGameObjectsWithTag(Assets.Scripts.Helper.Constants.Tags.Arbetsplats))
+            // Arbetsplatser
+            foreach (var apl in GameObject.FindGameObjectsWithTag(Tags.Arbetsplats))
             {
                 if (apl.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
                     apl.GetComponent<ArbetsplatsScript>().RemoveWorker();
             }
-            //Box
-            foreach (var shop in GameObject.FindGameObjectsWithTag(Assets.Scripts.Helper.Constants.Tags.PlaceToGetWorkers))
+
+            foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
             {
                 if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
                     if (!srChild.gameObject.activeSelf)
@@ -142,20 +142,19 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.Stairs) 				OnStairs = true;
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.WalkDownArea)  	        OnWalkDownArea = true;
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.WalkUpArea) 		    OnWalkUpArea = true;
-		if (col.tag == "LeftWall")			                                        TouchingLeftWall = true;
-		if (col.tag == "RightWall")			                                        TouchingRightWall = true;
+		if (col.tag == Tags.Stairs) 		OnStairs = true;
+		if (col.tag == Tags.WalkDownArea)  	OnWalkDownArea = true;
+		if (col.tag == Tags.WalkUpArea) 	OnWalkUpArea = true;
+		if (col.tag == Tags.LeftWall)       TouchingLeftWall = true;
+		if (col.tag == Tags.RightWall)		TouchingRightWall = true;
 	}
 
 	void OnTriggerExit2D(Collider2D col) {
-		Debug.Log(col.tag);
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.Stairs) 				OnStairs = false;
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.Stairs) 				StairsActivated = false;
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.WalkDownArea) 	        OnWalkDownArea = false;
-		if (col.tag == Assets.Scripts.Helper.Constants.Tags.WalkUpArea) 	    	OnWalkUpArea = false;
-		if (col.tag == "LeftWall")		                                            TouchingLeftWall = false;
-		if (col.tag == "RightWall")		                                            TouchingRightWall = false;
+		if (col.tag == Tags.Stairs) 		OnStairs = false;
+		if (col.tag == Tags.Stairs) 		StairsActivated = false;
+		if (col.tag == Tags.WalkDownArea) 	OnWalkDownArea = false;
+		if (col.tag == Tags.WalkUpArea) 	OnWalkUpArea = false;
+		if (col.tag == Tags.LeftWall)		TouchingLeftWall = false;
+		if (col.tag == Tags.RightWall)		TouchingRightWall = false;
 	}
 }
