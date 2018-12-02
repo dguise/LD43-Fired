@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
         Money += income;
 
         if (Money >= ExpansionInterval) {
-            ExpansionInterval += 100;
+            ExpansionInterval += (_floors.Count * 100);
             AddFloor();
         }
     }
