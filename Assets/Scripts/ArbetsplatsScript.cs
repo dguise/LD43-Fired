@@ -61,7 +61,6 @@ public class ArbetsplatsScript : MonoBehaviour
     public void RemoveWorker()
     {
         StahpInvoke();
-        arbetare.SetAwesome(false);
         arbetare.SetActive(false);
     }
 
