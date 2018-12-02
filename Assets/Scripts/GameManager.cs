@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     //1 dollar per bra worker
     const int inkomstPerAwesomeArbetsplats = 1;
-    //0 dollar per dålig
+    // 0 dollar per dålig
     const int inkomstPerArbetsplats = 0;
 
     private int _antalGuldmyntIPengabingen = 0;
@@ -33,11 +33,6 @@ public class GameManager : Singleton<GameManager>
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
         InvokeRepeating("BeraknaInkomst", 0, 1.0f);
-    }
-
-    private void Update()
-    {
-        
     }
 
     void BeraknaInkomst()

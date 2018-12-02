@@ -6,15 +6,27 @@ using UnityEngine.SceneManagement;
 public class AnykeyToContinue : MonoBehaviour
 {
     bool doOnce = true;
+    void Start() {
+        FadeManager.Instance.FadeIn();
+    }
     void Update()
     {
         if (doOnce)
         {
             if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) > SceneManager.sceneCountInBuildSettings ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
-                doOnce = false;
+                FadeManager.Instance.FadeOut(LoadNextScene);
             }
         }
+    }
+
+    void LoadNextScene()
+    {
+        SceneManager.LoadScene(
+            (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
+                ? 0 
+                : SceneManager.GetActiveScene().buildIndex + 1
+        );
+        doOnce = false;
     }
 }

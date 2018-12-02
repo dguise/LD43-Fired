@@ -35,15 +35,15 @@ public class FadeManager : MonoBehaviour
 
     public void FadeOut(Action doneCallback = null)
     {
-        if (fadeRoutine == null)
+        if (fadeRoutine == null) {
             fadeRoutine = StartCoroutine(_FadeOut(doneCallback));
+        }
     }
     private IEnumerator _FadeOut(Action doneCallback)
     {
         float tick = 0f;
         while (fadeImage.color != visible)
         {
-            Debug.Log("While loopin'");
             tick += Time.deltaTime * speed;
             fadeImage.color = Color.Lerp(invisible, visible, tick);
             yield return new WaitForEndOfFrame();
