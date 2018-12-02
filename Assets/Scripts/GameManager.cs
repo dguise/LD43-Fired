@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         set
         {
             _antalGuldmyntIPengabingen = value;
-            GUIManager.ScoreText = value.ToString() + " / " + RikedomsMal;
+            GUIManager.ScoreText = "$" + value.ToString() + " / " + RikedomsMal;
         }
     }
 
