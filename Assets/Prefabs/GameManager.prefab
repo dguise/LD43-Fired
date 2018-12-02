@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bedba355bd1544286927b36c0fa0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vaning: {fileID: 4344602872695312, guid: 27233d5cd393c62488a1298324e13f7a, type: 2}
+  vaningsHojd: 0
+  vaningar: []
 --- !u!114 &114683885923917204
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,7 +25,6 @@ public class AudioManager : Singleton<AudioManager>
         */
 
         _soundEffectList = Resources.LoadAll<AudioClip>("Chat").ToList();
-        Debug.Log(PrefabManager.Instance.Sounds.Count);
 
         _songSource = gameObject.AddComponent<AudioSource>();
         if (startingMusic >= 0)
