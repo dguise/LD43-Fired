@@ -5,8 +5,15 @@
 # exit with non-zero status after issuing an appropriate message if
 # it wants to stop the commit.
 #
+
+printf "##############################################################\n"
+printf "##############################################################\n"
+printf "##############################################################\n"
 printf "########################  MY DUDE  ###########################\n"
+printf "##############################################################\n"
 printf "\n"
-printf "Did you remember to save your scene & create prefabs? \n"
+printf "     Did you remember to save your scene & create prefabs? \n"
 printf "\n"
+printf "############################################################### \n"
+printf "############################################################### \n"
 printf "############################################################### \n"
