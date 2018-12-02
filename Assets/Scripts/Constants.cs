@@ -13,5 +13,5 @@ public static class Tags
     public static string PlaceToGetWorkers = "PlaceToGetWorkers";
     public static string LeftWall = "LeftWall";
     public static string RightWall = "RightWall";
-
+    public static string Vaning = "Vaning";
 }
