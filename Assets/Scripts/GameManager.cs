@@ -35,11 +35,13 @@ public class GameManager : Singleton<GameManager>
     }
 
     void Update() {
-        var diff = ExpansionInterval - Money;
-        currentTarp.transform.localScale = new  Vector3(
-            currentTarp.transform.localScale.x, 
-            diff / Settings.RangeForStartingTarp, 
-            currentTarp.transform.localScale.z);
+        if (currentTarp != null) {
+            var diff = ExpansionInterval - Money;
+            currentTarp.transform.localScale = new  Vector3(
+                currentTarp.transform.localScale.x, 
+                diff / Settings.RangeForStartingTarp, 
+                currentTarp.transform.localScale.z);
+        }
     }
 
     void CalculateIncome()

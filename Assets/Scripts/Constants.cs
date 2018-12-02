@@ -16,7 +16,7 @@ public static class Settings {
     public static float YouMustBeThisAwesome = 0.8f; // 0 - 1 inclusive
     public static float IntervalToCheckBadBehaviour = 10.0f;
     public static float YouMustBeThisBad = 0.8f; // 0 - 1 inclusive
-    public static float RotationSpeed = 3f;
+    public static float RotationSpeed = 450f;
 
     #endregion
     #region ____INCOME____
