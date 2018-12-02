@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private const float FLOOR_HEIGHT = 1.58f;
+    private int ExpansionInterval = 100;
     public Transform kiosk;
 
     [SerializeField] private List<Transform> _floors;
@@ -23,8 +24,6 @@ public class GameManager : Singleton<GameManager>
             _guiManager.ScoreText = "$" + value.ToString() + " / " + ExpansionInterval;
         }
     }
-
-    private int ExpansionInterval = 100;
 
     private void Start()
     {
@@ -82,5 +81,10 @@ public class GameManager : Singleton<GameManager>
         Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
         _floors.Add(v);
         kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
+        
+        var waves = GameObject.FindObjectsOfType<Vagstigning>();
+        foreach(var wave in waves) {
+            wave.shouldRise = true;
+        }
     }
 }

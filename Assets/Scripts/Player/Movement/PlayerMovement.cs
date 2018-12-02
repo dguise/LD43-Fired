@@ -51,8 +51,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (frozen) return;
-
         Vector2 velocity = new Vector2(0, 0);
 
         if (CanWalkHorizontal)
@@ -83,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(velocity);
 
-        if (Input.GetKeyDown(KeyCode.Space) && !OnStairs)
+        if (Input.GetKeyDown(KeyCode.Space) && !OnStairs && !CarryingWorker)
         {
             var gotWorker = TryGetWorkerFromBox();
             if (!gotWorker)
@@ -113,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
             if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
                 var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + new Vector3(0f, 8f, 0f), transform.rotation);
                 baby.GetComponent<Rigidbody2D>().simulated = true;
-                frozen = true;
                 anim.SetBool("Running", false);
                 AudioManager.Instance.PlayRandomize(0f, 11);
                 return true;
@@ -220,11 +217,9 @@ public class PlayerMovement : MonoBehaviour
         if (col.tag == Tags.RightWall) TouchingRightWall = false;
 
         if (col.tag == Tags.FallingWorker) {
-            if (frozen) {
-                frozen = false;
-                GameObject.Destroy(col.gameObject);
-                srChild.gameObject.SetActive(true);
-            }
+            frozen = false;
+            GameObject.Destroy(col.gameObject);
+            srChild.gameObject.SetActive(true);
         }
     }
 }

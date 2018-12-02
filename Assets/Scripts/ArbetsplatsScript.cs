@@ -51,7 +51,7 @@ public class ArbetsplatsScript : MonoBehaviour
     public void AddWorker()
     {
         arbetare.SetActive(true);
-        arbetare.GetComponent<Arbetare>().SetAwesome((Random.value > 0.5f)); //Hälften av gångerna är det en awesome person
+        arbetare.GetComponent<Arbetare>().SetAwesome((Random.value < Settings.SpawnedWorkerAwesomePercent));
         if (HasAwesomeWorker)
             TurnAwesome();
         else
@@ -61,12 +61,13 @@ public class ArbetsplatsScript : MonoBehaviour
     public void RemoveWorker()
     {
         StahpInvoke();
+        arbetare.SetAwesome(false);
         arbetare.SetActive(false);
     }
 
     private void CheckIfWorkerLostHisFlair()
     {
-        if (Random.value < Settings.YouMustBeThisAwesome)
+        if (Random.value > Settings.LoseAwesomenessPercent)
         {
             StahpInvoke();
             arbetare.GetComponent<Arbetare>().SetAwesome(false);
@@ -76,7 +77,7 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void DoStuffBadWorkersDo()
     {
-        if (Random.value > Settings.YouMustBeThisBad)
+        if (Random.value < Settings.ChanceToDoBadStuff)
         {
             arbetare.GetComponent<Arbetare>().DoBadStuff();
         }
@@ -84,7 +85,7 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void TurnAwesome()
     {
-        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToCheckAwesomeness); //var X sekund kollar vi 
+        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToTryTurnWorkerBad);
     }
 
     private void TurnBad()

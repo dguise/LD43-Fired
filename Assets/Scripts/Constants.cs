@@ -6,16 +6,17 @@ public static class Settings {
 
     #region ____PLAYER____
     public static float Speed = 0.037f;
-    public static float StairSpeedModifier = 0.5f;
+    public static float StairSpeedModifier = 0.7f;
     public static float KickingForce = 14f;
     #endregion
 
 
     #region ____WORKERS____
-    public static float IntervalToCheckAwesomeness = 10.0f;
-    public static float YouMustBeThisAwesome = 0.8f; // 0 - 1 inclusive
+    public static float SpawnedWorkerAwesomePercent = 1f;
+    public static float IntervalToTryTurnWorkerBad = 10.0f;
+    public static float LoseAwesomenessPercent = 0.2f; // Checked every IntervalToCheckAwesomeness 
     public static float IntervalToCheckBadBehaviour = 10.0f;
-    public static float YouMustBeThisBad = 0.8f; // 0 - 1 inclusive
+    public static float ChanceToDoBadStuff = 0.3f; // Show bad worker text every IntervalToCheckBadBehaviour 
     public static float RotationSpeed = 450f;
 
     #endregion

@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Vagstigning : MonoBehaviour {
-	
+	public bool shouldRise { get; set; }
 	void Update () {
+		if (shouldRise)
         transform.position = transform.position + new Vector3(0f, Settings.RiseSpeed * Time.deltaTime, 0f);
 	}
 
