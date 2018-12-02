@@ -229,16 +229,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 224843192477784206, guid: 0b975e5a43618ff4db21912e1e872a16,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114125765619154706, guid: 0b975e5a43618ff4db21912e1e872a16,
-        type: 2}
-      propertyPath: startingMusic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b975e5a43618ff4db21912e1e872a16, type: 2}
   m_IsPrefabAsset: 0

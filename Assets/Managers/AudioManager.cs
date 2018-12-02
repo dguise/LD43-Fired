@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
         _songList = Resources.LoadAll<AudioClip>("Songs").ToList();
 
         _songSource = gameObject.AddComponent<AudioSource>();
+        _songSource.volume = volume;
         if (startingMusic >= 0)
             PlayMusic(startingMusic);
     }
