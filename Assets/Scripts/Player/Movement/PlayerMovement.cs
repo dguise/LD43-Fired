@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sr;
     [SerializeField] private SpriteRenderer srChild;
     [SerializeField] private GameObject babyPrefab;
-    private float kickingPowah = 7.0f;
+    private float kickingPowah = 7.0f * 2f;
     private Animator anim;
 
     private bool CanWalkVertical
