@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
     public void PlayAudio(int sound, float pitch = 1)
     {
         AudioSource effect = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
-        effect.pitch = pitch;
+        //effect.pitch = pitch; FUCK ÄNDRINGAR AV PITCH, GÖR OM GÖR RÄTT
         effect.clip = _soundEffectList[sound];
         effect.Play();
         Destroy(effect, effect.clip.length + 0.5f); // 0.5f for good measure
