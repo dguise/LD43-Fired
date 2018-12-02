@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a1e5df31f4d4147acf9faceb7f9c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  speed: 0.015
   srChild: {fileID: 212919845459287886}
   babyPrefab: {fileID: 1024088786191708, guid: b12c686ec14397a4ca609a4bc6d4f4c9, type: 2}
 --- !u!212 &212666675938660260
