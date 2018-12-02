@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool OnWalkUpArea = false;
     private bool TouchingRightWall = false;
     private bool TouchingLeftWall = false;
+    private bool frozen = false;
 
     private SpriteRenderer sr;
     [SerializeField] private SpriteRenderer srChild;
@@ -55,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (frozen) return;
+
         Vector2 velocity = new Vector2(0, 0);
 
         if (CanWalkHorizontal)
@@ -101,9 +104,12 @@ public class PlayerMovement : MonoBehaviour
 
             foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
             {
-                if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
-                    if (!srChild.gameObject.activeSelf)
-                        srChild.gameObject.SetActive(true);
+                if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
+                    var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + new Vector3(0f, 8f, 0f), transform.rotation);
+                    baby.GetComponent<Rigidbody2D>().simulated = true;
+                    frozen = true;
+                    anim.SetBool("Running", false);
+                }
             }
         }
     }
@@ -191,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
         if (col.tag == Tags.WalkUpArea) OnWalkUpArea = true;
         if (col.tag == Tags.LeftWall) TouchingLeftWall = true;
         if (col.tag == Tags.RightWall) TouchingRightWall = true;
+
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -201,5 +208,13 @@ public class PlayerMovement : MonoBehaviour
         if (col.tag == Tags.WalkUpArea) OnWalkUpArea = false;
         if (col.tag == Tags.LeftWall) TouchingLeftWall = false;
         if (col.tag == Tags.RightWall) TouchingRightWall = false;
+
+        if (col.tag == Tags.FallingWorker) {
+            if (frozen) {
+                frozen = false;
+                GameObject.Destroy(col.gameObject);
+                srChild.gameObject.SetActive(true);
+            }
+        }
     }
 }

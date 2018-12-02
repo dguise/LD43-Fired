@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     private const float FLOOR_HEIGHT = 1.58f;
     private const int INCOME_PER_GOOD_WORKSTATION = 1;
     private const int INCOME_PER_WORKSTATION = 0;
+    public Transform kiosk;
 
     [SerializeField] private List<Transform> _floors;
     private GameObject[] _floorPrefabs;
@@ -57,5 +58,6 @@ public class GameManager : Singleton<GameManager>
     {
         Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
         _floors.Add(v);
+        kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
     }
 }

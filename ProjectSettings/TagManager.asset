@@ -12,6 +12,7 @@ TagManager:
   - RightWall
   - PlaceToGetWorkers
   - Vaning
+  - FallingWorker
   layers:
   - Default
   - TransparentFX
