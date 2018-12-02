@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vågor : MonoBehaviour
+public class Vagor : MonoBehaviour
 {
     public float radius = 0.1f;
     public float speed = 5.0f;
@@ -12,12 +12,12 @@ public class Vågor : MonoBehaviour
 
     void Start()
     {
-        this.mittpunkt = transform.position;
+        this.mittpunkt = transform.localPosition;
     }
 
     void Update()
     {
         angle += speed * Time.deltaTime;
-        transform.position = mittpunkt + (new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius);
+        transform.localPosition = mittpunkt + (new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius);
     }
 }
