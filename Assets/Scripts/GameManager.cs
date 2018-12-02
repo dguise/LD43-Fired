@@ -4,61 +4,58 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public float vaningsHojd;
+    private const float FLOOR_HEIGHT = 1.58f;
+    private const int INCOME_PER_GOOD_WORKSTATION = 1;
+    private const int INCOME_PER_WORKSTATION = 0;
 
-    [SerializeField] private List<Transform> vaningar;
-    private GameObject[] Vaningar;
+    [SerializeField] private List<Transform> _floors;
+    private GameObject[] _floorPrefabs;
 
-    private UIScript GUIManager;
-
-    //1 dollar per bra worker
-    const int inkomstPerAwesomeArbetsplats = 1;
-    // 0 dollar per dålig
-    const int inkomstPerArbetsplats = 0;
-
-    private int _antalGuldmyntIPengabingen = 0;
-    int antalGuldmyntIPengabingen
+    private UIScript _guiManager;
+    private int _money = 0;
+    public int Money
     {
-        get { return _antalGuldmyntIPengabingen; }
+        get { return _money; }
         set
         {
-            _antalGuldmyntIPengabingen = value;
-            GUIManager.ScoreText = "$" + value.ToString() + " / " + RikedomsMal;
+            _money = value;
+            _guiManager.ScoreText = "$" + value.ToString() + " / " + ExpansionInterval;
         }
     }
 
-    private int RikedomsMal = 100;
+    private int ExpansionInterval = 100;
 
     private void Start()
     {
-        GUIManager = GameObject.FindObjectOfType<UIScript>();
-        InvokeRepeating("BeraknaInkomst", 0, 1.0f);
-        Vaningar = Resources.LoadAll<GameObject>("Floors");
+        _guiManager = GameObject.FindObjectOfType<UIScript>();
+        InvokeRepeating("CalculateIncome", 0, 1.0f);
+        _floorPrefabs = Resources.LoadAll<GameObject>("Floors");
     }
 
-    void BeraknaInkomst()
+    void CalculateIncome()
     {
-        var arbetsplatser = GameObject.FindObjectsOfType<ArbetsplatsScript>();
+        var workstations = GameObject.FindObjectsOfType<ArbetsplatsScript>();
 
-        int inkomst = 0;
-        foreach (var apl in arbetsplatser)
+        int income = 0;
+        foreach (var workstation in workstations)
         {
-            inkomst = 10;
-            if (apl.Aktiv)
-                inkomst += apl.HasAwesomeWorker ? inkomstPerAwesomeArbetsplats : inkomstPerArbetsplats;
+            income = 10;                
+            income += (workstation.HasAwesomeWorker)
+                ? INCOME_PER_GOOD_WORKSTATION 
+                : INCOME_PER_WORKSTATION;
         }
 
-        antalGuldmyntIPengabingen += inkomst;
+        Money += income;
 
-        if (antalGuldmyntIPengabingen >= RikedomsMal) {
-            RikedomsMal += 100;
-            AddVaning();
+        if (Money >= ExpansionInterval) {
+            ExpansionInterval += 100;
+            AddFloor();
         }
     }
 
-    void AddVaning()
+    void AddFloor()
     {
-        Transform v = Instantiate(Vaningar[Random.Range(0, Vaningar.Length - 1)].transform, transform.position + new Vector3(0f, vaningar.Count * vaningsHojd, 0f), Quaternion.identity);
-        vaningar.Add(v);
+        Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, _floors[_floors.length-1].position + new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
+        _floors.Add(v);
     }
 }
