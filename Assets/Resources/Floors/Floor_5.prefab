@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4344602872695312}
   - component: {fileID: 212483602282230676}
   m_Layer: 0
-  m_Name: Floor_0
+  m_Name: Floor_5
   m_TagString: Vaning
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
