@@ -56,10 +56,12 @@ public class GameManager : Singleton<GameManager>
                 ? Settings.INCOME_PER_GOOD_WORKSTATION
                 : Settings.INCOME_PER_WORKSTATION;
         }
-        ////Uncomment for debugging
-        //Money += 5; 
-        //if (Input.GetKey(KeyCode.KeypadPlus))
-        //    Money += 10;
+        //Uncomment for debugging
+#if UNITY_EDITOR
+        Money += 5;
+        if (Input.GetKey(KeyCode.KeypadPlus))
+            Money += 10;
+#endif
         Money += income;
 
         if (Money >= ExpansionInterval) {
