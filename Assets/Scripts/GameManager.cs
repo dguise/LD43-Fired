@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>
                 currentTarp.transform.localScale.x, 
                 diff / Settings.RangeForStartingTarp, 
                 currentTarp.transform.localScale.z);
+            
         }
     }
 
@@ -55,18 +56,22 @@ public class GameManager : Singleton<GameManager>
                 ? Settings.INCOME_PER_GOOD_WORKSTATION
                 : Settings.INCOME_PER_WORKSTATION;
         }
-
+        ////Uncomment for debugging
+        //Money += 5; 
+        //if (Input.GetKey(KeyCode.KeypadPlus))
+        //    Money += 10;
         Money += income;
 
         if (Money >= ExpansionInterval) {
             ExpansionInterval += ExpansionInterval;
             AddFloor();
             _tarping = false;
+            GameObject.Destroy(currentTarp);
         }
         else if (Money > ExpansionInterval - Settings.RangeForStartingTarp && !_tarping)
         {
             _tarping = true;
-            currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
+            currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT - (FLOOR_HEIGHT / 2), 0f), Quaternion.identity);
         }
     }
    
