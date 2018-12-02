@@ -11,9 +11,18 @@ public class Vagstigning : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		FadeManager.Instance.FadeOut(() => {
-			SceneManager.LoadScene("GameOverScene");
-		});
-		
+		if (col.tag != Tags.Player) return;
+
+		if (FadeManager.Instance != null) {
+			FadeManager.Instance.FadeOut(() => {
+				LoadGameOverScene();
+			});
+		} else {
+			LoadGameOverScene();
+		}
+	}
+
+	void LoadGameOverScene() {
+		SceneManager.LoadScene("GameOverScene");
 	}
 }
