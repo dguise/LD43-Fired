@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabManager : Singleton<PrefabManager>
+public class PrefabManager : MonoBehaviour
 {
     #region Utility
     public delegate void Progress(float progress);
@@ -13,7 +13,7 @@ public class PrefabManager : Singleton<PrefabManager>
     private int _loadingCategories = 3; // How many times IncrementProgress() will be called while preloading.
     #endregion
 
-
+    public static PrefabManager Instance;
     public GameObject Player { get; private set; }
 
     public List<AudioClip[]> Songs { get; private set; }
@@ -51,7 +51,15 @@ public class PrefabManager : Singleton<PrefabManager>
         // {
         //     ParticleEffects.Add(Resources.Load<GameObject>(particleName));
         // }
-        DontDestroyOnLoad(gameObject);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(transform.parent.gameObject);
+        }
     }
 
     private void IncrementProgress()

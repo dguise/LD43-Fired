@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
     [Range(0, 1)]
     [Tooltip("The general volume all clips will be affected by")]
     public float volume = 1;
@@ -15,6 +16,20 @@ public class AudioManager : Singleton<AudioManager>
     private List<AudioClip> _soundEffectList = new List<AudioClip>();
 
     private AudioSource _songSource;
+
+
+    void Awake() 
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(transform.parent.gameObject);
+        }
+    }
 
     void Start()
     {

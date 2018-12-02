@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+		FadeManager.Instance.FadeIn();
     }
 
 
