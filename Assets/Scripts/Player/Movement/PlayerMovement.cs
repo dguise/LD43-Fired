@@ -109,14 +109,28 @@ public class PlayerMovement : MonoBehaviour
         foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
         {
             if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
-                var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + new Vector3(0f, 8f, 0f), transform.rotation);
-                baby.GetComponent<Rigidbody2D>().simulated = true;
+                var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + Vector3.up * 8f, transform.rotation);
+                StartCoroutine(MoveTowardsPlayer(baby));
                 anim.SetBool("Running", false);
                 AudioManager.Instance.PlayRandomize(0f, 11);
                 return true;
             }
         }
         return false;
+    }
+
+    private IEnumerator MoveTowardsPlayer(GameObject baby) {
+        float step = 0;
+        float speed = 6;
+        while (Vector2.Distance(baby.transform.position, transform.position) > 0.2f) {
+            step += Time.deltaTime * speed;
+            Debug.Log(step);
+            baby.transform.position = Vector2.MoveTowards(transform.position + Vector3.up * 8f, transform.position, step);
+
+            yield return new WaitForEndOfFrame();
+        }
+        GameObject.Destroy(baby);
+        srChild.gameObject.SetActive(true);
     }
 
     private void KickTheBaby()
@@ -215,11 +229,5 @@ public class PlayerMovement : MonoBehaviour
         if (col.tag == Tags.WalkUpArea) OnWalkUpArea = false;
         if (col.tag == Tags.LeftWall) TouchingLeftWall = false;
         if (col.tag == Tags.RightWall) TouchingRightWall = false;
-
-        if (col.tag == Tags.FallingWorker) {
-            frozen = false;
-            GameObject.Destroy(col.gameObject);
-            srChild.gameObject.SetActive(true);
-        }
     }
 }
