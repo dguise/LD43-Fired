@@ -6,6 +6,6 @@ public class RotateOverTime : MonoBehaviour {
 	void Update ()
     {
         this.transform.Rotate(
-            Vector3.forward * (Settings.RoationSpeed * Time.deltaTime));
+            Vector3.forward * (Settings.RotationSpeed * Time.deltaTime));
     }
 }

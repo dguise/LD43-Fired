@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
             AddFloor();
             _tarping = false;
         }
-        else if (Money > ExpansionInterval - _rangeForStartingTarp && !_tarping)
+        else if (Money > ExpansionInterval - Settings.RangeForStartingTarp && !_tarping)
         {
             _tarping = true;
             currentTarp = GameObject.Instantiate(tarp, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);

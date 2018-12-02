@@ -57,14 +57,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (CanWalkHorizontal)
         {
-            velocity.x = Input.GetAxisRaw("Horizontal") * speed;
+            velocity.x = Input.GetAxisRaw("Horizontal") * Settings.Speed;
             velocity = HandleLeftWall(velocity);
             velocity = HandleRightWall(velocity);
         }
 
         if (CanWalkVertical)
         {
-            velocity.y = Input.GetAxisRaw("Vertical") * speed * stairSpeedModifier;
+            velocity.y = Input.GetAxisRaw("Vertical") * Settings.Speed * Settings.StairSpeedModifier;
             velocity = HandleWalkDown(velocity);
             velocity = HandleWalkUp(velocity);
             velocity = HandleStairs(velocity);
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             var gotWorker = TryGetWorkerFromBox();
             if (!gotWorker)
-                var kicked = TryKickWorker();
+                TryKickWorker();
         }
     }
 
@@ -166,11 +166,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (vel.y > 0)
         {
-            vel.x = speed * stairSpeedModifier * angle;
+            vel.x = Settings.Speed * Settings.StairSpeedModifier * angle;
         }
         if (vel.y < 0)
         {
-            vel.x = -speed * stairSpeedModifier * angle;
+            vel.x = -Settings.Speed * Settings.StairSpeedModifier * angle;
         }
         return vel;
     }

@@ -84,7 +84,7 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void TurnAwesome()
     {
-        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToCheckAwesomenessintervalToCheckAwesomeness); //var X sekund kollar vi 
+        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToCheckAwesomeness); //var X sekund kollar vi 
     }
 
     private void TurnBad()
