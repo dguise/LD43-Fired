@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Leave as -1 to not play a song on start")]
     public int startingMusic = -1;
 
-    private List<AudioClip[]> _songList = new List<AudioClip[]>();
+    private List<AudioClip> _songList = new List<AudioClip>();
     private List<AudioClip> _soundEffectList = new List<AudioClip>();
 
     private AudioSource _songSource;
@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         _soundEffectList = Resources.LoadAll<AudioClip>("chat").ToList();
+        _songList = Resources.LoadAll<AudioClip>("Songs").ToList();
 
         _songSource = gameObject.AddComponent<AudioSource>();
         if (startingMusic >= 0)
@@ -60,18 +61,7 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(int number)
     {
         _songSource.loop = false;
-        _songSource.clip = _songList[number][0];
-        _songSource.Play();
-        if (_songList[number][1] != null)
-            StartCoroutine(PlayMusicLoop(number, _songSource.clip.length + 0.5f));
-    }
-
-    // Song loop
-    private IEnumerator PlayMusicLoop(int number, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        _songSource.loop = true;
-        _songSource.clip = _songList[number][1];
+        _songSource.clip = _songList[number];
         _songSource.Play();
     }
 }
