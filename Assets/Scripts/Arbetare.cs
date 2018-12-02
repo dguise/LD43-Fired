@@ -10,7 +10,6 @@ public class Arbetare : MonoBehaviour {
     {
         get { return awesome; }
     }
-    private float awesomeFactor = 1.0f;
 
     public void SetAwesome(bool value)
     {
@@ -37,5 +36,10 @@ public class Arbetare : MonoBehaviour {
         "La la la",
         "♪-♫-♪",
         "Zzzzz",
+        "Check this gif!",
+        ":joy: :ok_hand:",
+        "reddit.com",
+        "OMG!",
+        "Here's a pic of my kid"
     };
 }

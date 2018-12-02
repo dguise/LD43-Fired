@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Range(0.01f, 0.1f)]
-    public float speed = 0.05f;
-
-    private float stairSpeedModifier = 0.5f;
-
     private bool OnStairs = false;
     private bool StairsActivated = false;
     private bool OnWalkDownArea = false;
@@ -88,30 +83,42 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(velocity);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !OnStairs)
         {
-            foreach (var apl in GameObject.FindGameObjectsWithTag(Tags.Arbetsplats))
-            {
-                if (apl.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
-                {
-                    if (apl.GetComponent<ArbetsplatsScript>().Aktiv)
-                    {
-                        apl.GetComponent<ArbetsplatsScript>().RemoveWorker();
-                        KickTheBaby();
-                    }
-                }
-            }
+            var gotWorker = TryGetWorkerFromBox();
+            if (!gotWorker)
+                var kicked = TryKickWorker();
+        }
+    }
 
-            foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
+    bool TryKickWorker() {
+        foreach (var apl in GameObject.FindGameObjectsWithTag(Tags.Arbetsplats))
+        {
+            if (apl.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
             {
-                if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
-                    var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + new Vector3(0f, 8f, 0f), transform.rotation);
-                    baby.GetComponent<Rigidbody2D>().simulated = true;
-                    frozen = true;
-                    anim.SetBool("Running", false);
+                if (apl.GetComponent<ArbetsplatsScript>().Aktiv)
+                {
+                    apl.GetComponent<ArbetsplatsScript>().RemoveWorker();
+                    KickTheBaby();
+                    return true;
                 }
             }
         }
+        return false;
+    }
+
+    bool TryGetWorkerFromBox() {
+        foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
+        {
+            if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
+                var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + new Vector3(0f, 8f, 0f), transform.rotation);
+                baby.GetComponent<Rigidbody2D>().simulated = true;
+                frozen = true;
+                anim.SetBool("Running", false);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void KickTheBaby()

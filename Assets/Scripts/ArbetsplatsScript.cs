@@ -7,10 +7,6 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private UIScript GUIManager;
     [SerializeField] private GameObject arbetare;
-    const float intervalToCheckAwesomeness = 10.0f;
-    const float youMustBeThisAwesome = 0.8f; //0-1 inclusive
-    const float intervalToCheckBadBehaviour = 10.0f;
-    const float youMustBeThisBad = 0.8f; //0-1 inclusive
 
     public bool Aktiv
     {
@@ -47,13 +43,6 @@ public class ArbetsplatsScript : MonoBehaviour
             }
         }
     }
-
-    public void OnTriggerExit2D(Collider2D col)
-    {
-        //if (IsPlayer(col))
-        //    RemoveWorker();
-    }
-
     private bool IsPlayer(Collider2D col)
     {
         return (col.tag == "Player");
@@ -77,7 +66,7 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void CheckIfWorkerLostHisFlair()
     {
-        if (Random.value < youMustBeThisAwesome)
+        if (Random.value < Settings.YouMustBeThisAwesome)
         {
             StahpInvoke();
             arbetare.GetComponent<Arbetare>().SetAwesome(false);
@@ -87,7 +76,7 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void DoStuffBadWorkersDo()
     {
-        if (Random.value > youMustBeThisBad)
+        if (Random.value > Settings.YouMustBeThisBad)
         {
             arbetare.GetComponent<Arbetare>().DoBadStuff();
         }
@@ -95,12 +84,12 @@ public class ArbetsplatsScript : MonoBehaviour
 
     private void TurnAwesome()
     {
-        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, intervalToCheckAwesomeness); //var X sekund kollar vi 
+        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToCheckAwesomenessintervalToCheckAwesomeness); //var X sekund kollar vi 
     }
 
     private void TurnBad()
     {
-        InvokeRepeating("DoStuffBadWorkersDo", 0, intervalToCheckBadBehaviour);
+        InvokeRepeating("DoStuffBadWorkersDo", 0, Settings.IntervalToCheckBadBehaviour);
     }
 
     private void StahpInvoke()
@@ -110,72 +99,75 @@ public class ArbetsplatsScript : MonoBehaviour
     }
 
     private List<string> listOfQuestions = new List<string> {
-"How are you today?",
-"Any problems here?",
-"How are the kids?",
-"Did you resolve that issue we had?",
-"How do you like it here?",
-"Could you help me with something?",
-"What do you think about our company?",
-"Any suggestions on how to improve our sales?",
-"What did you have for lunch?",
-"Are you satisfied with your collegues?",
-"Do you feel that your tasks are challenging enough?",
-"Do you know what time it is?",
-"We have a meeting soon.",
-"You are here early today.",
-"Have you finished your report?",
-"The company is doing bad right now and we might have to get rid of people.",
-"I am collecting money for a gift to Steve's birthday.",};
+        "How are you today?",
+        "Any problems here?",
+        "How are the kids?",
+        "Did you resolve that issue we had?",
+        "How do you like it here?",
+        "Could you help me with something?",
+        "What do you think about our company?",
+        "Any suggestions on how to improve our sales?",
+        "What did you have for lunch?",
+        "Are you satisfied with your collegues?",
+        "Do you feel that your tasks are challenging enough?",
+        "Do you know what time it is?",
+        "We have a meeting soon.",
+        "You are here early today.",
+        "Have you finished your report?",
+        "The company is doing bad right now and we might have to get rid of people.",
+        "I am collecting money for a gift to Steve's birthday.",
+    };
 
 
     private List<string> listOfAnswers = new List<string> {
-"Fine how are you?",
-"Not at all!",
-"Great!",
-"Yes, it was tricky but we found a good solution.",
-"This workplace is great!",
-"Yes of course, let me just finish up here.",
-"Very nice and feels good to do something important.",
-"Acctually, I have a small list of suggestions here if you want to have a look?",
-"Todays lunch at the cantina. I can recommend that.",
-"Yes, they are very helpful and have plenty of experience.",
-"I think there is a good balance.",
-"It is time to work, haha!",
-"Yes, I will be there in time.",
-"I have a lot to do these days.",
-"Almost done!",
-"That sounds bad, maybe some extra work will help.",
-"Here is something from me too.",};
+        "Fine how are you?",
+        "Not at all!",
+        "Great!",
+        "Yes, it was tricky but we found a good solution.",
+        "This workplace is great!",
+        "Yes of course, let me just finish up here.",
+        "Very nice and feels good to do something important.",
+        "Acctually, I have a small list of suggestions here if you want to have a look?",
+        "Todays lunch at the cantina. I can recommend that.",
+        "Yes, they are very helpful and have plenty of experience.",
+        "I think there is a good balance.",
+        "It is time to work, haha!",
+        "Yes, I will be there in time.",
+        "I have a lot to do these days.",
+        "Almost done!",
+        "That sounds bad, maybe some extra work will help.",
+        "Here is something from me too.",
+    };
 
     private List<string> listOfErik = new List<string> {
-"Bananas!",
-"I hate you.",
-"...no.",
-"&%?$@!",
-"AAAAAaargh",
-"Goff goff",
-"error syntax",
-"My collegues smell bad.",
-"I can not help you right now.",
-"Stay a while and listen.",
-"The important thing is that we are happy.",
-"What?",
-"...",
-"No?",
-"Yes.",
-"Sounds great.",
-"Ok.",
-"Where am I?",
-"Who am I?",
-"Too... many.... numbers...",
-"LOL",
-"Please, do not talk to me.",
-"Do not watch my screen",
-"I do not have to answer that!",
-"Zzzzzz",
-"Crush you enemies, see them driven before you, and hear the lamentations of their women.",
-"Why?",
-"help",};
+        "Bananas!",
+        "I hate you.",
+        "...no.",
+        "&%?$@!",
+        "AAAAAaargh",
+        "Goff goff",
+        "error syntax",
+        "My collegues smell bad.",
+        "I can not help you right now.",
+        "Stay a while and listen.",
+        "The important thing is that we are happy.",
+        "What?",
+        "...",
+        "No?",
+        "Yes.",
+        "Sounds great.",
+        "Ok.",
+        "Where am I?",
+        "Who am I?",
+        "Too... many.... numbers...",
+        "LOL",
+        "Please, do not talk to me.",
+        "Do not watch my screen",
+        "I do not have to answer that!",
+        "Zzzzzz",
+        "Crush you enemies, see them driven before you, and hear the lamentations of their women.",
+        "Why?",
+        "help",
+    };
 
 }

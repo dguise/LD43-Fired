@@ -2,6 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public static class Settings {
+
+    #region ____PLAYER____
+    public static const float Speed = 0.037f;
+    public static const float StairSpeedModifier = 0.5f;
+    public static const float KickingForce = 14f;
+    #endregion
+
+
+    #region ____WORKERS____
+    public static const float IntervalToCheckAwesomeness = 10.0f;
+    public static const float YouMustBeThisAwesome = 0.8f; // 0 - 1 inclusive
+    public static const float IntervalToCheckBadBehaviour = 10.0f;
+    public static const float YouMustBeThisBad = 0.8f; // 0 - 1 inclusive
+
+    #endregion
+    #region ____INCOME____
+
+    public static const int INCOME_PER_GOOD_WORKSTATION = 1; // TODO IMPLEMENT IN GameManager.cs
+    public static const int INCOME_PER_WORKSTATION = 0; // TODO IMPLEMENT IN GameManager.cs
+    public static int ExpansionInterval = 100; // TODO IMPLEMENT IN GameManager.cs
+    
+    #endregion
+    #region ____Water____
+    public static const float RiseSpeed = 0.2f;
+
+    #endregion
+
+}
 
 public static class Tags
 {

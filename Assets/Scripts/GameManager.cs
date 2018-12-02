@@ -45,7 +45,6 @@ public class GameManager : Singleton<GameManager>
         int income = 0;
         foreach (var workstation in workstations)
         {
-            income = 10;
             income += (workstation.HasAwesomeWorker)
                 ? INCOME_PER_GOOD_WORKSTATION
                 : INCOME_PER_WORKSTATION;
@@ -54,8 +53,7 @@ public class GameManager : Singleton<GameManager>
         Money += income;
 
         if (Money >= ExpansionInterval)
-        {
-            ExpansionInterval += (_floors.Count * 100);
+            ExpansionInterval += ExpansionInterval;
             AddFloor();
             _tarping = false;
         }
