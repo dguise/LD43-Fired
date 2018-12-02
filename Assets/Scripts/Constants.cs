@@ -26,7 +26,7 @@ public static class Settings {
     
     #endregion
     #region ____Misc____
-    public static float RiseSpeed = 0.2f;
+    public static float RiseSpeed = 0.05f;
     public static float RangeForStartingTarp = 30f;
     
 
