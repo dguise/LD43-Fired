@@ -12,7 +12,7 @@ public class AnykeyToContinue : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) > SceneManager.sceneCount ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) > SceneManager.sceneCountInBuildSettings ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
                 doOnce = false;
             }
         }
