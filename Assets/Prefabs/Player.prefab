@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a1e5df31f4d4147acf9faceb7f9c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.037
   srChild: {fileID: 212720234149584992}
   babyPrefab: {fileID: 1024088786191708, guid: b12c686ec14397a4ca609a4bc6d4f4c9, type: 2}
 --- !u!212 &212666675938660260
@@ -265,7 +264,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 998
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b2b010d1d7910c041888bf5a97f6671b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
