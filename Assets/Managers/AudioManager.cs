@@ -78,19 +78,19 @@ public class AudioManager : MonoBehaviour
         switch (aSoundType)
         {
             case enumSoundType.Chat:
-                PlayRandomize(Random.Range(0, 4), 1);
+                PlayAudio(Random.Range(0, 4), 1);
                 break;
             case enumSoundType.Glass:
-                PlayRandomize(Random.Range(5, 8), 1);
+                PlayAudio(Random.Range(5, 8), 1);
                 break;
             case enumSoundType.Kick:
-                PlayRandomize(Random.Range(9, 10), 1);
+                PlayAudio(Random.Range(9, 10), 1);
                 break;
             case enumSoundType.Call:
-                PlayRandomize(11, 1);
+                PlayAudio(11, 1);
                 break;
             case enumSoundType.Hire:
-                PlayRandomize(12, 1);
+                PlayAudio(12, 1);
                 break;
             case enumSoundType.Construction:
                 PlayAudio(13, 1);
