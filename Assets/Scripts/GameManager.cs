@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
 
     void AddFloor()
     {
-        Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, _floors[0].position + new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
+        Transform v = Instantiate(_floorPrefabs[Random.Range(0, _floorPrefabs.Length - 1)].transform, new Vector3(0f, _floors.Count * FLOOR_HEIGHT, 0f), Quaternion.identity);
         _floors.Add(v);
     }
 }

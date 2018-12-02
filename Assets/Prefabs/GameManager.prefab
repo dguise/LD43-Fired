@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983368503189894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9140747, y: 0.8338488, z: 0.18122014}
+  m_LocalPosition: {x: 0, y: -2.72059, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bedba355bd1544286927b36c0fa0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vaning: {fileID: 4344602872695312, guid: 27233d5cd393c62488a1298324e13f7a, type: 2}
-  vaningsHojd: 1.58
-  vaningar: []
+  _floors:
+  - {fileID: 0}
+  - {fileID: 0}
