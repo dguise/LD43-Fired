@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3daea1d96023440b845098e620ee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.7
+  volume: 0.4
   startingMusic: 0
 --- !u!114 &114219028455911502
 MonoBehaviour:

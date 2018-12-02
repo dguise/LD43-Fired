@@ -82,6 +82,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator Tarp(GameObject tarp)
     {
+        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Construction);
         currentTarp.transform.localScale = new Vector3(1, 0, 1);
         float elapsedTime = 0;
         while (elapsedTime < duration)

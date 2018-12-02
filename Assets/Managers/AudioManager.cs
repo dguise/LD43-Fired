@@ -17,6 +17,16 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource _songSource;
 
+    public enum enumSoundType
+    {
+        Chat,
+        Glass,
+        Kick,
+        Call,
+        Hire,
+        Construction
+    }
+
 
     void Awake() 
     {
@@ -61,6 +71,33 @@ public class AudioManager : MonoBehaviour
         pitch = Random.Range(1 - pitch, 1 + pitch);
         int random = Random.Range(0, sound.Length);
         PlayAudio(sound[random], pitch);
+    }
+
+    public void PlayRandomize(enumSoundType aSoundType)
+    {
+        switch (aSoundType)
+        {
+            case enumSoundType.Chat:
+                PlayRandomize(Random.Range(0, 4), 1);
+                break;
+            case enumSoundType.Glass:
+                PlayRandomize(Random.Range(5, 8), 1);
+                break;
+            case enumSoundType.Kick:
+                PlayRandomize(Random.Range(9, 10), 1);
+                break;
+            case enumSoundType.Call:
+                PlayRandomize(11, 1);
+                break;
+            case enumSoundType.Hire:
+                PlayRandomize(12, 1);
+                break;
+            case enumSoundType.Construction:
+                PlayAudio(13, 1);
+                break;
+            default:
+                break;
+        }
     }
 
     // Song intro
