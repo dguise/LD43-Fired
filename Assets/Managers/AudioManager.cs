@@ -63,5 +63,13 @@ public class AudioManager : MonoBehaviour
         _songSource.loop = false;
         _songSource.clip = _songList[number];
         _songSource.Play();
+        StartCoroutine(LoopSong(number));
     }
+
+    IEnumerator LoopSong(int number) {
+        yield return new WaitForSeconds(_songSource.clip.length);
+        _songSource.clip = _songList[number+1];
+        _songSource.loop = true;
+        _songSource.Play();
+    } 
 }
