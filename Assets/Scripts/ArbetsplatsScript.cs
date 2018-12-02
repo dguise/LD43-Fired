@@ -33,7 +33,7 @@ public class ArbetsplatsScript : MonoBehaviour
         {
             if (Aktiv)
             {
-                int indexOfQA = Random.Range(0, 
+                int indexOfQA = Random.Range(0,
                     (listOfQuestions.Count <= listOfAnswers.Count ? listOfQuestions.Count - 1 : listOfAnswers.Count - 1));  //Om de är olika längd så utgår vi ifrån kortaste av de 2 så att vi har en rad i båda listorna
                 int indexOfStoopidA = Random.Range(0, listOfErik.Count);
                 GUIManager.ShowDialogue(listOfQuestions[indexOfQA],
@@ -109,7 +109,7 @@ public class ArbetsplatsScript : MonoBehaviour
         CancelInvoke("DoStuffBadWorkersDo");
     }
 
-    public List<string> listOfQuestions = new List<string> {
+    private List<string> listOfQuestions = new List<string> {
 "How are you today?",
 "Any problems here?",
 "How are the kids?",
@@ -129,26 +129,26 @@ public class ArbetsplatsScript : MonoBehaviour
 "I am collecting money for a gift to Steve's birthday.",};
 
 
-    public List<string> listOfAnswers = new List<string> {
-"-Fine how are you?",
-"-Not at all!",
-"-Great!",
-"-Yes, it was tricky but we found a good solution.",
-"-This workplace is great!",
-"-Yes of course, let me just finish up here.",
-"-Very nice and feels good to do something important.",
-"-Acctually, I have a small list of suggestions here if you want to have a look?",
-"-Todays lunch at the cantina. I can recommend that.",
-"-Yes, they are very helpful and have plenty of experience.",
-"-I think there is a good balance.",
-"-It is time to work, haha!",
-"-Yes, I will be there in time.",
-"-I have a lot to do these days.",
-"-Almost done!",
-"-That sounds bad, maybe some extra work will help.",
-"-Here is something from me too.",};
+    private List<string> listOfAnswers = new List<string> {
+"Fine how are you?",
+"Not at all!",
+"Great!",
+"Yes, it was tricky but we found a good solution.",
+"This workplace is great!",
+"Yes of course, let me just finish up here.",
+"Very nice and feels good to do something important.",
+"Acctually, I have a small list of suggestions here if you want to have a look?",
+"Todays lunch at the cantina. I can recommend that.",
+"Yes, they are very helpful and have plenty of experience.",
+"I think there is a good balance.",
+"It is time to work, haha!",
+"Yes, I will be there in time.",
+"I have a lot to do these days.",
+"Almost done!",
+"That sounds bad, maybe some extra work will help.",
+"Here is something from me too.",};
 
-    public List<string> listOfErik = new List<string> {
+    private List<string> listOfErik = new List<string> {
 "Bananas!",
 "I hate you.",
 "...no.",
