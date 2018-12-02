@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Vagstigning : MonoBehaviour {
 	public float riseSpeed = 0.2f;
@@ -16,6 +17,6 @@ public class Vagstigning : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		Debug.Log("ur ded fam");
+		SceneManager.LoadScene("GameOverScene");
 	}
 }
