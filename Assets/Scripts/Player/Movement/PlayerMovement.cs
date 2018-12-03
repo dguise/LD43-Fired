@@ -20,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     //Skumpa Kiddo
     private bool _skumpaKiddoUpp = true;
     private float _lastTimeStamp = 0;
-    private float _timeBetweenSkumps = 0.05f;
-    private float _skumpDistance = 0.05f;
+    private float _timeBetweenSkumps = 0.02f;
+    private float _skumpDistance = 0.02f;
 
     private bool CanWalkVertical
     {
@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+
         Vector2 velocity = new Vector2(0, 0);
 
         if (CanWalkHorizontal)
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
         var isRunning = velocity.x != 0;
         anim.SetBool("Running", isRunning);
+        anim.SetBool("OnLadder", OnStairs);
         if (isRunning)
         {
             sr.flipX = velocity.x > 0;
@@ -101,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
                 CarryingWorker = true;
             }
         }
+
     }
 
     bool TryKickWorker() {
