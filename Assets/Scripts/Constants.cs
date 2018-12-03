@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Settings {
 
     #region ____PLAYER____
-    public static float Speed = 0.037f;
+    public static float Speed = 0.067f;
     public static float StairSpeedModifier = 0.7f;
     public static float KickingForce = 14f;
     #endregion

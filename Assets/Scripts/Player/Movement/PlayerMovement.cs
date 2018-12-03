@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 velocity = new Vector2(0, 0);
 
@@ -89,7 +89,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.Translate(velocity);
+    }
 
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Space) && !OnStairs && !CarryingWorker)
         {
             var gotWorker = TryGetWorkerFromBox();
@@ -135,8 +137,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator MoveTowardsPlayer(GameObject baby) {
+        yield return new WaitForSeconds(1.5f);
+
         float step = 0;
-        float speed = 6;
+        float speed = 24;
         while (Vector2.Distance(baby.transform.position, transform.position) > 0.2f) {
             step += Time.deltaTime * speed;
             baby.transform.position = Vector2.MoveTowards(transform.position + Vector3.up * 8f, transform.position, step);
