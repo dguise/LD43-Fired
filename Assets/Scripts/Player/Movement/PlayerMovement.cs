@@ -146,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
         while (Vector2.Distance(baby.transform.position, transform.position) > 0.2f) {
             step += Time.deltaTime * speed;
             baby.transform.position = Vector2.MoveTowards(transform.position + Vector3.up * 8f, transform.position, step);
-
             yield return new WaitForEndOfFrame();
         }
         GameObject.Destroy(baby);

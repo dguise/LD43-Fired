@@ -22,8 +22,10 @@ public class Vagstigning : MonoBehaviour {
 			}
 		} else {
 			var ap = col.GetComponent<ArbetsplatsScript>();
-			if (ap != null)
+			if (ap != null) {
 				ap.RemoveWorker();
+				Destroy(col.gameObject);
+			}
 		}
 	}
 
