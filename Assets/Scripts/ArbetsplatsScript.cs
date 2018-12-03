@@ -8,6 +8,7 @@ public class ArbetsplatsScript : MonoBehaviour
     private UIScript GUIManager;
     private Arbetare _childWorker;
     [SerializeField] private GameObject arbetare;
+    public bool noWorkers = false;
 
     public bool Aktiv
     {
@@ -22,6 +23,8 @@ public class ArbetsplatsScript : MonoBehaviour
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
         _childWorker = arbetare.GetComponent<Arbetare>();
+        if (!noWorkers)
+            AddWorker();
     }
 
     public void AddWorker()
