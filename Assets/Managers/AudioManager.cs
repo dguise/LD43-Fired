@@ -57,12 +57,14 @@ public class AudioManager : MonoBehaviour
             PlayMusic(startingMusic);
     }
 
-    public void PlayAudio(int sound, float pitch = 1)
+    public void PlayAudio(int sound, float pitch = 1, float volume = 1)
     {
         AudioSource effect = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
         //effect.pitch = pitch; FUCK ÄNDRINGAR AV PITCH, GÖR OM GÖR RÄTT
+        // :help::argdrik:
         effect.clip = _soundEffectList[sound];
         effect.Play();
+        effect.volume = volume;
         Destroy(effect, effect.clip.length + 0.5f); // 0.5f for good measure
     }
 
@@ -73,27 +75,27 @@ public class AudioManager : MonoBehaviour
         PlayAudio(sound[random], pitch);
     }
 
-    public void PlayRandomize(enumSoundType aSoundType)
+    public void PlayRandomize(enumSoundType aSoundType, float volume = 1)
     {
         switch (aSoundType)
         {
             case enumSoundType.Chat:
-                PlayAudio(Random.Range(0, 4 + 1), 1); //+1 för att få det inclusive
+                PlayAudio(Random.Range(0, 4 + 1), 1, volume); //+1 för att få det inclusive
                 break;
             case enumSoundType.Glass:
-                PlayAudio(Random.Range(5, 8 + 1), 1);
+                PlayAudio(Random.Range(5, 8 + 1), 1, volume);
                 break;
             case enumSoundType.Kick:
-                PlayAudio(Random.Range(9, 10 + 1), 1);
+                PlayAudio(Random.Range(9, 10 + 1), 1, volume);
                 break;
             case enumSoundType.Call:
-                PlayAudio(11, 1);
+                PlayAudio(11, 1, volume);
                 break;
             case enumSoundType.Hire:
-                PlayAudio(12, 1);
+                PlayAudio(12, 1, volume);
                 break;
             case enumSoundType.Construction:
-                PlayAudio(13, 1);
+                PlayAudio(13, 1, volume);
                 break;
             default:
                 break;

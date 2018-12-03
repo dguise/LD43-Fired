@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
                     _isCallingDownWorker = true;
                     var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + Vector3.up * 8f, transform.rotation);
                     StartCoroutine(MoveTowardsPlayer(baby));
-                    AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Call);
+                    AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Call, volume: 0.2f);
                     return true;
                 }
             }
@@ -161,14 +161,14 @@ public class PlayerMovement : MonoBehaviour
         baby.GetComponent<Rigidbody2D>().simulated = true;
         baby.GetComponent<Rigidbody2D>().AddForce(new Vector2(this.transform.position.x < 0 ? -kickingPowah : kickingPowah, 3), ForceMode2D.Impulse);
         GameObject.Destroy(baby, 3.0f);
-        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Kick);
+        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Kick, volume: 0.3f);
     }
 
     public void DropOffWorker()
     {
         srChild.gameObject.SetActive(false);
         CarryingWorker = false;
-        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Hire);
+        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Hire, volume: 0.5f);
     }
 
     #region collision movement restrictions
