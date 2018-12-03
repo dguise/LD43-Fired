@@ -23,15 +23,24 @@ public class ArbetsplatsScript : MonoBehaviour
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
         _childWorker = arbetare.GetComponent<Arbetare>();
-        if (!noWorkers)
-            AddWorker();
+        if (!noWorkers) {
+            if (Random.value < 0.5f)
+                AddWorker(true);
+            else
+                AddWorker(false);
+        }
     }
 
-    public void AddWorker()
+    public void AddWorker(bool force_stupid = false)
     {
         arbetare.SetActive(true);
         _childWorker.Awesome = true;
-        InitiateTryBadifyWorker();        
+        if (force_stupid) {
+            _childWorker.Awesome = false;
+            _childWorker.DoBadStuff();
+        } else {
+            InitiateTryBadifyWorker();        
+        }
     }
 
     public void RemoveWorker()
