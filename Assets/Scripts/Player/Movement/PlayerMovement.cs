@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private float kickingPowah = 7.0f * 2f;
     private Animator anim;
 
-    //Skumpa Kiddo
+    // Skumpa Kiddo
     private bool _skumpaKiddoUpp = true;
     private float _lastTimeStamp = 0;
     private float _timeBetweenSkumps = 0.02f;
@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public bool CarryingWorker = false;
+    private bool _isCallingDownWorker = false;
 
 
     void Start()
@@ -126,9 +127,9 @@ public class PlayerMovement : MonoBehaviour
         foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
         {
             if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
-                if (!CarryingWorker) {
+                if (!CarryingWorker && !_isCallingDownWorker) {
+                    _isCallingDownWorker = true;
                     var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + Vector3.up * 8f, transform.rotation);
-                    CarryingWorker = true;
                     StartCoroutine(MoveTowardsPlayer(baby));
                     AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Call);
                     return true;
@@ -150,6 +151,8 @@ public class PlayerMovement : MonoBehaviour
         }
         GameObject.Destroy(baby);
         srChild.gameObject.SetActive(true);
+        CarryingWorker = true;
+        _isCallingDownWorker = false;
     }
 
     private void KickTheBaby()
