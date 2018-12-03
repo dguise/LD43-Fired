@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private bool OnWalkUpArea = false;
     private bool TouchingRightWall = false;
     private bool TouchingLeftWall = false;
-    private bool frozen = false;
 
     private SpriteRenderer sr;
     [SerializeField] private SpriteRenderer srChild;
@@ -34,10 +33,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public bool CarryingWorker
-    {
-        get { return srChild.gameObject.activeSelf; }
-    }
+    public bool CarryingWorker = false;
 
 
     void Start()
@@ -84,8 +80,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !OnStairs && !CarryingWorker)
         {
             var gotWorker = TryGetWorkerFromBox();
-            if (!gotWorker)
+            if (!gotWorker) {
                 TryKickWorker();
+            } else {
+                CarryingWorker = true;
+            }
         }
     }
 
@@ -110,11 +109,13 @@ public class PlayerMovement : MonoBehaviour
         foreach (var shop in GameObject.FindGameObjectsWithTag(Tags.PlaceToGetWorkers))
         {
             if (shop.GetComponentInChildren<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds)) {
-                var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + Vector3.up * 8f, transform.rotation);
-                StartCoroutine(MoveTowardsPlayer(baby));
-                anim.SetBool("Running", false);
-                AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Call);
-                return true;
+                if (!CarryingWorker) {
+                    var baby = (GameObject)GameObject.Instantiate(babyPrefab, transform.position + Vector3.up * 8f, transform.rotation);
+                    CarryingWorker = true;
+                    StartCoroutine(MoveTowardsPlayer(baby));
+                    AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Call);
+                    return true;
+                }
             }
         }
         return false;
@@ -125,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
         float speed = 6;
         while (Vector2.Distance(baby.transform.position, transform.position) > 0.2f) {
             step += Time.deltaTime * speed;
-            Debug.Log(step);
             baby.transform.position = Vector2.MoveTowards(transform.position + Vector3.up * 8f, transform.position, step);
 
             yield return new WaitForEndOfFrame();
@@ -146,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
     public void DropOffWorker()
     {
         srChild.gameObject.SetActive(false);
+        CarryingWorker = false;
         AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Hire);
     }
 
