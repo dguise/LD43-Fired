@@ -23,7 +23,7 @@ public static class Settings {
     #region ____INCOME____
 
     public static int INCOME_PER_GOOD_WORKSTATION = 1; // TODO IMPLEMENT IN GameManager.cs
-    public static int INCOME_PER_WORKSTATION = -3; // TODO IMPLEMENT IN GameManager.cs
+    public static int INCOME_PER_WORKSTATION = 0; // TODO IMPLEMENT IN GameManager.cs
     
     #endregion
     #region ____Misc____
