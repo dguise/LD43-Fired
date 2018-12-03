@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     apl.GetComponent<ArbetsplatsScript>().RemoveWorker();
                     KickTheBaby();
+                    anim.SetTrigger("Kick");
                     return true;
                 }
             }

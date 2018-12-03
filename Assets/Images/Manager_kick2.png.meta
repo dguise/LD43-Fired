@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: fadc9d49cfc9da140b90de85f6ff9e4d
+guid: 608dd5ff89c5b6d4983af3c8c2f10486
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Manager_kick_0
-    21300002: Manager_kick_1
-    21300004: Manager_kick_2
-    21300006: Manager_kick_3
+    21300000: Manager_kick2_0
+    21300002: Manager_kick2_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -110,12 +108,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Manager_kick_0
+      name: Manager_kick2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 95.25
+        width: 95.5
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,18 +122,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4b95d88a08860e488c6d4363280c559
+      spriteID: 08c1633d509e3494aa8a8ead7704ed15
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Manager_kick_1
+      name: Manager_kick2_1
       rect:
         serializedVersion: 2
         x: 95
         y: 0
-        width: 95.25
+        width: 95.5
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,47 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e958aa2b7de90b0488d2e583b2bc777f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manager_kick_2
-      rect:
-        serializedVersion: 2
-        x: 190
-        y: 0
-        width: 95.25
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5cd1f98bf3adc7c48b501cdd32132989
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manager_kick_3
-      rect:
-        serializedVersion: 2
-        x: 285
-        y: 0
-        width: 95.25
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 477635e714721cf498184eea65729b34
+      spriteID: 63349a5d0d692a240a10857b8dba22cf
       vertices: []
       indices: 
       edges: []
@@ -192,7 +150,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: bfcaee0d6193288449f24802aeca3a54
+    spriteID: 733516eac20ed5040ace41613689f1d2
     vertices: []
     indices: 
     edges: []
