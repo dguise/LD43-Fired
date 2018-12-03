@@ -6,34 +6,84 @@ public class ArbetsplatsScript : MonoBehaviour
 {
 
     private UIScript GUIManager;
+    private Arbetare _childWorker;
     [SerializeField] private GameObject arbetare;
 
     public bool Aktiv
     {
-        get { return arbetare.activeSelf; } //Kanske lägga på mer logik framöver
+        get { return arbetare.activeSelf; }
     }
     public bool HasAwesomeWorker
     {
-        get { return arbetare.GetComponent<Arbetare>().seeminglyAwesome; }
+        get { return _childWorker.Awesome; }
     }
 
     private void Start()
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
-        //AddWorker();
+        _childWorker = arbetare.GetComponent<Arbetare>();
+    }
+
+    public void AddWorker()
+    {
+        arbetare.SetActive(true);
+        _childWorker.Awesome = true;
+        InitiateTryBadifyWorker();        
+    }
+
+    public void RemoveWorker()
+    {
+        CancelAllInvokations();
+        arbetare.SetActive(false);
+    }
+
+    private void InitiateTryBadifyWorker()
+    {
+        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToTryTurnWorkerBad);
+    }
+
+    private void InitiateTryDoBadStuff()
+    {
+        InvokeRepeating("DoStuffBadWorkersDo", 0, Settings.IntervalToCheckBadBehaviour);
+    }
+
+    private void CancelAllInvokations()
+    {
+        CancelInvoke("CheckIfWorkerLostHisFlair");
+        CancelInvoke("DoStuffBadWorkersDo");
+    }
+
+    private void CheckIfWorkerLostHisFlair()
+    {
+        if (Random.value < Settings.LoseAwesomenessPercent)
+        {
+            CancelAllInvokations();
+            InitiateTryDoBadStuff();
+            _childWorker.Awesome = false;
+        }
+    }
+
+    private void DoStuffBadWorkersDo()
+    {
+        if (Random.value < Settings.ChanceToDoBadStuff)
+        {
+            _childWorker.DoBadStuff();
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (IsPlayer(col))
+        if (col.tag == Tags.Player)
         {
             if (Aktiv)
             {
                 int indexOfQA = Random.Range(0,
-                    (listOfQuestions.Count <= listOfAnswers.Count ? listOfQuestions.Count - 1 : listOfAnswers.Count - 1));  //Om de är olika längd så utgår vi ifrån kortaste av de 2 så att vi har en rad i båda listorna
-                int indexOfStoopidA = Random.Range(0, listOfErik.Count);
-                GUIManager.ShowDialogue(listOfQuestions[indexOfQA],
-                                        HasAwesomeWorker ? listOfAnswers[indexOfQA] : indexOfStoopidA < listOfErik.Count - 1 ? listOfErik[indexOfStoopidA] : Random.Range(1, 101).ToString());
+                    (_questions.Count <= _smartAnswers.Count)
+                        ? _questions.Count - 1 
+                        : _smartAnswers.Count - 1);  //Om de är olika längd så utgår vi ifrån kortaste av de 2 så att vi har en rad i båda listorna
+                int indexOfStoopidA = Random.Range(0, _stupidAnswers.Count);
+                GUIManager.ShowDialogue(_questions[indexOfQA],
+                                        HasAwesomeWorker ? _smartAnswers[indexOfQA] : indexOfStoopidA < _stupidAnswers.Count - 1 ? _stupidAnswers[indexOfStoopidA] : Random.Range(1, 101).ToString());
 
             }
             else if (col.gameObject.GetComponent<PlayerMovement>().CarryingWorker)
@@ -43,62 +93,8 @@ public class ArbetsplatsScript : MonoBehaviour
             }
         }
     }
-    private bool IsPlayer(Collider2D col)
-    {
-        return (col.tag == "Player");
-    }
 
-    public void AddWorker()
-    {
-        arbetare.SetActive(true);
-        arbetare.GetComponent<Arbetare>().SetAwesome((Random.value < Settings.SpawnedWorkerAwesomePercent));
-        if (HasAwesomeWorker)
-            TurnAwesome();
-        else
-            TurnBad();
-    }
-
-    public void RemoveWorker()
-    {
-        StahpInvoke();
-        arbetare.SetActive(false);
-    }
-
-    private void CheckIfWorkerLostHisFlair()
-    {
-        if (Random.value > Settings.LoseAwesomenessPercent)
-        {
-            StahpInvoke();
-            arbetare.GetComponent<Arbetare>().SetAwesome(false);
-            TurnBad();
-        }
-    }
-
-    private void DoStuffBadWorkersDo()
-    {
-        if (Random.value < Settings.ChanceToDoBadStuff)
-        {
-            arbetare.GetComponent<Arbetare>().DoBadStuff();
-        }
-    }
-
-    private void TurnAwesome()
-    {
-        InvokeRepeating("CheckIfWorkerLostHisFlair", 0, Settings.IntervalToTryTurnWorkerBad);
-    }
-
-    private void TurnBad()
-    {
-        InvokeRepeating("DoStuffBadWorkersDo", 0, Settings.IntervalToCheckBadBehaviour);
-    }
-
-    private void StahpInvoke()
-    {
-        CancelInvoke("CheckIfWorkerLostHisFlair");
-        CancelInvoke("DoStuffBadWorkersDo");
-    }
-
-    private List<string> listOfQuestions = new List<string> {
+    private List<string> _questions = new List<string> {
         "How are you today?",
         "Any problems here?",
         "How are the kids?",
@@ -117,9 +113,7 @@ public class ArbetsplatsScript : MonoBehaviour
         "The company is doing bad right now and we might have to get rid of people.",
         "I am collecting money for a gift to Steve's birthday.",
     };
-
-
-    private List<string> listOfAnswers = new List<string> {
+    private List<string> _smartAnswers = new List<string> {
         "Fine how are you?",
         "Not at all!",
         "Great!",
@@ -138,8 +132,7 @@ public class ArbetsplatsScript : MonoBehaviour
         "That sounds bad, maybe some extra work will help.",
         "Here is something from me too.",
     };
-
-    private List<string> listOfErik = new List<string> {
+    private List<string> _stupidAnswers = new List<string> {
         "Bananas!",
         "I hate you.",
         "...no.",
@@ -169,5 +162,4 @@ public class ArbetsplatsScript : MonoBehaviour
         "Why?",
         "help",
     };
-
 }

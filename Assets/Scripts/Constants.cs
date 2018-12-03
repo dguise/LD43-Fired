@@ -14,7 +14,7 @@ public static class Settings {
     #region ____WORKERS____
     public static float SpawnedWorkerAwesomePercent = 1f;
     public static float IntervalToTryTurnWorkerBad = 10.0f;
-    public static float LoseAwesomenessPercent = 0.2f; // Checked every IntervalToCheckAwesomeness 
+    public static float LoseAwesomenessPercent = 0.05f; // Checked every IntervalToCheckAwesomeness 
     public static float IntervalToCheckBadBehaviour = 10.0f;
     public static float ChanceToDoBadStuff = 0.3f; // Show bad worker text every IntervalToCheckBadBehaviour 
     public static float RotationSpeed = 450f;

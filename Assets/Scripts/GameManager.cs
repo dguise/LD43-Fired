@@ -44,10 +44,9 @@ public class GameManager : Singleton<GameManager>
                 ? Settings.INCOME_PER_GOOD_WORKSTATION
                 : Settings.INCOME_PER_WORKSTATION;
         }
-        //Uncomment for debugging
+        // Uncomment for debugging
 #if UNITY_EDITOR
-        Money += 5;
-        if (Input.GetKey(KeyCode.KeypadPlus))
+        if (Input.GetKey(KeyCode.M))
             Money += 10;
 #endif
         Money += income;
@@ -72,14 +71,6 @@ public class GameManager : Singleton<GameManager>
             wave.shouldRise = true;
         }
     }
-
-    private IEnumerator FulFixFörErik()
-    {
-        kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
-        _floors[_floors.Count - 1].gameObject.SetActive(true);
-        yield return new WaitForEndOfFrame();
-    }
-
     IEnumerator Tarp(GameObject tarp)
     {
         AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Construction);
@@ -93,7 +84,8 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForEndOfFrame();
         }
 
-        StartCoroutine(FulFixFörErik());
+        kiosk.position += new Vector3(0f, FLOOR_HEIGHT, 0f);
+        _floors[_floors.Count - 1].gameObject.SetActive(true);
 
         elapsedTime = 0;
         while (elapsedTime < duration)

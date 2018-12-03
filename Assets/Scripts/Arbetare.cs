@@ -5,20 +5,10 @@ using UnityEngine;
 public class Arbetare : MonoBehaviour {
 
     [SerializeField] private TextMesh rpText;
-    private bool awesome = false;
-    public bool seeminglyAwesome
-    {
-        get { return awesome; }
-    }
-
-    public void SetAwesome(bool value)
-    {
-        awesome = value;
-    }
-
+    public bool Awesome { get; set; }
     public void DoBadStuff()
     {
-        StartCoroutine("ShowrpText");
+        StartCoroutine(ShowrpText());
     }
 
     IEnumerator ShowrpText()
@@ -40,6 +30,7 @@ public class Arbetare : MonoBehaviour {
         ":joy: :ok_hand:",
         "reddit.com",
         "OMG!",
-        "Here's a pic of my kid"
+        "Here's a pic of my kid",
+        ":(",
     };
 }
