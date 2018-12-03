@@ -22,6 +22,7 @@ public class ArbetsplatsScript : MonoBehaviour
     {
         GUIManager = GameObject.FindObjectOfType<UIScript>();
         _childWorker = arbetare.GetComponent<Arbetare>();
+        AddWorker();
     }
 
     public void AddWorker()

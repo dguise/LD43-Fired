@@ -16,7 +16,7 @@ public static class Settings {
     public static float IntervalToTryTurnWorkerBad = 10.0f;
     public static float LoseAwesomenessPercent = 0.05f; // Checked every IntervalToCheckAwesomeness 
     public static float IntervalToCheckBadBehaviour = 10.0f;
-    public static float ChanceToDoBadStuff = 0.3f; // Show bad worker text every IntervalToCheckBadBehaviour 
+    public static float ChanceToDoBadStuff = 0.8f; // Show bad worker text every IntervalToCheckBadBehaviour 
     public static float RotationSpeed = 450f;
 
     #endregion
