@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private float kickingPowah = 7.0f * 2f;
     private Animator anim;
 
+    //Skumpa Kiddo
+    private bool _skumpaKiddoUpp = true;
+    private float _lastTimeStamp = 0;
+    private float _timeBetweenSkumps = 0.05f;
+    private float _skumpDistance = 0.05f;
+
     private bool CanWalkVertical
     {
         get
@@ -73,6 +79,13 @@ public class PlayerMovement : MonoBehaviour
             srChild.transform.localPosition = (srChild.flipX)
                 ? new Vector3(0.44f, srChild.transform.localPosition.y, srChild.transform.localPosition.z)
                 : new Vector3(-0.44f, srChild.transform.localPosition.y, srChild.transform.localPosition.z);
+
+            if (Time.time - _lastTimeStamp > _timeBetweenSkumps)
+            {
+                _skumpaKiddoUpp = !_skumpaKiddoUpp;
+                _lastTimeStamp = Time.time;
+                srChild.transform.localPosition = new Vector3(srChild.transform.localPosition.x, srChild.transform.localPosition.y + (_skumpaKiddoUpp ? _skumpDistance : -_skumpDistance), srChild.transform.localPosition.z);
+            }
         }
 
         transform.Translate(velocity);
