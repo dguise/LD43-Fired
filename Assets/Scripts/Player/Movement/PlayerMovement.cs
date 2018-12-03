@@ -92,14 +92,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space) && !OnStairs && !CarryingWorker)
+        if (Input.GetKeyDown(KeyCode.Space) && !OnStairs)
         {
-            var gotWorker = TryGetWorkerFromBox();
-            if (!gotWorker) {
-                TryKickWorker();
-            } else {
-                CarryingWorker = true;
+            if (!CarryingWorker) {
+                TryGetWorkerFromBox();
             }
+            TryKickWorker();
         }
     }
 
