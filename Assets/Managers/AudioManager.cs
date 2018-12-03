@@ -78,13 +78,13 @@ public class AudioManager : MonoBehaviour
         switch (aSoundType)
         {
             case enumSoundType.Chat:
-                PlayAudio(Random.Range(0, 4), 1);
+                PlayAudio(Random.Range(0, 4 + 1), 1); //+1 för att få det inclusive
                 break;
             case enumSoundType.Glass:
-                PlayAudio(Random.Range(5, 8), 1);
+                PlayAudio(Random.Range(5, 8 + 1), 1);
                 break;
             case enumSoundType.Kick:
-                PlayAudio(Random.Range(9, 10), 1);
+                PlayAudio(Random.Range(9, 10 + 1), 1);
                 break;
             case enumSoundType.Call:
                 PlayAudio(11, 1);
