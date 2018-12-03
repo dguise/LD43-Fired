@@ -62,7 +62,7 @@ public class UIScript : MonoBehaviour {
         }
 
         coroutine = StartCoroutine(ShowOrHideDialogue(question, answer));
-        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Chat, 0.3f);
+        AudioManager.Instance.PlayRandomize(AudioManager.enumSoundType.Chat, 0.2f);
     }
 
     IEnumerator ShowOrHideDialogue(string question, string answer, float secondsToWaitForHide = 5.0f)
